@@ -1,6 +1,6 @@
 # House Taken Over
 
-Text adventure inspired by the short story "House Taken Over", written by Julio Cortazar.
+Text adventure inspired by the short story "House Taken Over", written by Julio Cortázar.
 The game uses the [advenjure](https://github.com/facundoolano/advenjure) engine.
 
 ## Usage
