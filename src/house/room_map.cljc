@@ -51,14 +51,14 @@
     (room/connect :house-side :north :corner)
     (room/connect :corner :east :alley)
 
-    ; alley connected to garden by climbing a fig
+    ; alley is connected to garden by climbing a fig
     (room/connect :garden :east :shed)
     (room/connect :garden :south :house-back)
     (room/one-way-connect :house-back :southwest :west-passage)
     (room/one-way-connect :house-back :southeast :east-passage)
     (room/one-way-connect :west-passage :north :house-back)
     (room/one-way-connect :east-passage :north :house-back)
-    (room/connect :house-back :south :back-hall3)
+    (room/one-way-connect :house-back :south "The back door was locked.")
 
     (room/connect :back-hall3 :west :bedroom2)
     (room/connect :back-hall3 :east :bedroom3)

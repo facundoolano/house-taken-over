@@ -74,7 +74,7 @@
               (room/add-item wall "")))
 
 (def fig (item/make ["creeping fig" "fig"]
-                    "The fig was uneven, as if it hadn’t been taken care of in a while. Strong branches were reachable behind the outer layer of leaves."
+                    "The fig was uneven, as if it hadn't been taken care of in a while. Strong branches were reachable behind the outer layer of leaves."
                     :climb-up :garden))
 
 (def alley (->
