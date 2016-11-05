@@ -5,7 +5,7 @@
             [house.rooms.street :refer [street vestibule house-side corner alley]]
             [house.rooms.garden :refer [garden shed house-back west-passage east-passage]]
             [house.rooms.back :refer [back-hall1 back-hall2 back-hall3 bedroom1
-                                      bedroom2 bedroom3 tapestry living dinning]]
+                                      bedroom2 bedroom3 tapestry library dinning]]
 
             [house.rooms.middle :refer [front-hall side-hall kitchen bathroom]]
             [house.rooms.front :refer [living woman-bedroom man-bedroom]]))
@@ -51,7 +51,7 @@
     (room/connect :house-side :north :corner)
     (room/connect :corner :east :alley)
 
-    (room/one-way-connect :alley :up :garden) ; FIXME not really connected, use climb puzzle instead
+    ; alley connected to garden by climbing a fig
     (room/connect :garden :east :shed)
     (room/connect :garden :south :house-back)
     (room/one-way-connect :house-back :southwest :west-passage)

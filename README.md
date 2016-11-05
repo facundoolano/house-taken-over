@@ -1,20 +1,18 @@
-# advenjure-example
+# House Taken Over
 
-![Example game](example.gif)
-
-Example game for the [advenjure](https://github.com/facundoolano/advenjure) text game engine.
-You can play it online [here](https://facundoolano.github.io/advenjure/).
+Text adventure inspired by the short story "House Taken Over", written by Julio Cortazar.
+The game uses the [advenjure](https://github.com/facundoolano/advenjure) engine.
 
 ## Usage
 
 Clone the respository and [Install leiningen](http://leiningen.org/#install) if necessary.
-To run the example game on the terminal:
+To run the game on the terminal:
 
 ```
 lein run
 ```
 
-To run the example game on the browser, using figwheel for development:
+To run the game on the browser, using figwheel for development:
 
 ```
 lein figwheel dev
