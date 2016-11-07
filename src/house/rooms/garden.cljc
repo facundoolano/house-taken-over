@@ -29,18 +29,19 @@
                             :open true
                             :enter :back-hall3)
         new-map (room/connect (:room-map gs) :house-back :south :back-hall3)]
-    (-> gs
-      (assoc :room-map new-map)
-      (utils/replace-item door new-door))))
+    (if-not (:locked door)
+      (-> gs
+        (assoc :room-map new-map)
+        (utils/replace-item door new-door)))))
 
-; FIXME need to cover case use with screw and use with hammer, screwdriver
-; FIXME unlock with crowbar is sort of funny, but open with isn't, it should work! --> probably best to separate verbs
 (def back-door (item/make ["door" "back door"]
                           "It didn't look particularly tough."
                           :break "Perhaps with the proper tooling."
                           :enter "It was locked."
                           :unlock {:say "Sure. I unlocked the hell out of it. The door was now open."
-                                   :post `crow-post} ; FIXME so far not working
+                                   :post `crow-post}
+                          :open-with {:say "Easy job for the crowbar. The door was now open."
+                                      :post `crow-post}
                           :locked true))
 
 (def crowbar (item/make "crowbar" "satisfy all your breaking-into-places needs."
