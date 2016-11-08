@@ -16,9 +16,11 @@
 (defn crow-pre
   "If trying to open the back door do it, otherwise default message."
   [gs item]
-  (if (some #{"back door"} (:names item))
-    true
-    "I didn't want to break into that."))
+  (cond
+    (some #{"back door"} (:names item)) true
+    (= (:id item) "bath-window") "There was no need to break the window, just find a way to reach it."
+    (some #{"window"} (:names item)) "I didn't want to draw too much attention."
+    :else "I didn't want to break into that."))
 
 (defn crow-post
   "Open the door and connect the rooms."
@@ -52,16 +54,26 @@
                                    :post `crow-post}))
 
 (def screwdriver (item/make "screwdriver" "the dust and the rust were competing to see who'd take over the thing first."
-                            :use-with "I didn't see any screws."
+                            :use-with "That didn't have any screws in it."
                             :take true))
 
 (def hammer (item/make "hammer" "The head was a bit loose but still usable."
                        :take true
                        :use-with "Everything looking like a nail, huh?"))
 
-; FIXME add drawer with screwdriver
-; FIXME add table
-; TODO custom text when opening the drawer
+(defn post-open
+  [old gs]
+  (let [drawer (utils/find-first gs "drawer")
+        new-drawer (update-in drawer [:open] dissoc :say)]
+    (utils/replace-item gs drawer new-drawer)))
+
+(def drawer (item/make ["drawer"] "Just a drawer."
+                       :closed true
+                       :open {:pre true
+                              :say "There was a lot of useless junk inside the drawer, and also a rusty screwdriver."
+                              :post `post-open}
+                       :items #{screwdriver}))
+
 (def shed (->
             (room/make "Shed"
                        "The shed was barely big enough for me to stand inside. There was a brief work table with a drawer against one of the walls and a tool board against the other. Right by the door was an old lawn mower."
@@ -69,6 +81,8 @@
             (room/add-item (item/make ["tool board" "tools" "board" "toolset"]
                                       "Only a mid-size hammer and a crowbar were left of what appeared to have been a big toolset."
                                       :take "Not the entire thing!") "")
+            (room/add-item (item/make ["table" "work table"] "Seemed too small to get any real work done. It had one drawer.") "")
+            (room/add-item drawer "")
             (room/add-item hammer "")
             (room/add-item crowbar "")
             (room/add-item (item/make ["lawn mower" "mower"]
@@ -88,20 +102,19 @@
                   (room/add-item (item/make "house" "It looked even bigger from this side."
                                                     :enter `can-enter
                                                     :break "Perhaps with the proper tooling."))))
-; TODO react to crowbar?
 (def bath-window (item/make "window"
                             "It was too high to look inside from where I was standing."
                             :look-in "It was too high to look inside from where I was standing."
                             :open "I could reach the border of the window but not open it from the ground level."
                             :use "I could reach the border of the window but not open it from the ground level."
                             :enter "I could reach the border of the window but not open it from the ground level."
-                            :break "There was no need to do that."))
+                            :break "There was no need to break the window, just find a way to reach it."
+                            :id "bath-window"))
 (def west-passage (->
                     (room/make "West passage"
                                "The western passage ended up in a wall with a high window, probably of a bathroom.")
                     (room/add-item bath-window "")))
 
-; TODO react to crowbar?
 (def east-passage (->
                     (room/make "East passage"
                                "The eastern passage ended up in the back of one of the bedrooms I saw from the street. It had a window.")
