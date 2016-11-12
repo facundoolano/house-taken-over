@@ -10,7 +10,6 @@
             [house.rooms.middle :refer [front-hall side-hall kitchen bathroom]]
             [house.rooms.front :refer [living woman-bedroom man-bedroom]]))
 
-
 ;; define a room map and then set the connections between rooms
 (def room-map
   (->
@@ -63,12 +62,14 @@
     (room/connect :back-hall3 :west :bedroom2)
     (room/connect :back-hall3 :east :bedroom3)
     (room/connect :back-hall3 :south :back-hall2)
-    (room/connect :back-hall2 :west :bedroom1)
+    (room/connect :back-hall2 :west :bedroom1) ; FIXME not really will be blocked
     (room/connect :back-hall2 :east :tapestry)
     (room/connect :back-hall2 :south :back-hall1)
+    (room/connect :dinning :north :tapestry)
     (room/connect :back-hall1 :west :dinning)
     (room/connect :back-hall1 :east :library)
-    (room/connect :back-hall1 :south :front-hall) ; FIXME not really, this will be blocked
+    (room/connect :library :north :bedroom1) ; FIXME will actually be hidden at first
+    (room/connect :back-hall1 :south "The door was locked from the other side.")
 
     (room/connect :front-hall :west :side-hall)
     (room/connect :side-hall :west :bathroom)

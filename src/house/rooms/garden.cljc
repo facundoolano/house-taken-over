@@ -18,6 +18,7 @@
   [gs item]
   (cond
     (some #{"back door"} (:names item)) true
+    (some #{"oak door"} (:names item)) "That would most likely have broken the crowbar."
     (= (:id item) "bath-window") "There was no need to break the window, just find a way to reach it."
     (some #{"window"} (:names item)) "I didn't want to draw too much attention."
     :else "I didn't want to break into that."))
