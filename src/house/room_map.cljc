@@ -5,7 +5,8 @@
             [house.rooms.street :refer [street vestibule house-side corner alley]]
             [house.rooms.garden :refer [garden shed house-back west-passage east-passage]]
             [house.rooms.back :refer [back-hall1 back-hall2 back-hall3 bedroom1
-                                      bedroom2 bedroom3 tapestry library dinning]]
+                                      bedroom2 bedroom3 tapestry library dining
+                                      back-bedroom-post]]
 
             [house.rooms.middle :refer [front-hall side-hall kitchen bathroom]]
             [house.rooms.front :refer [living woman-bedroom man-bedroom]]))
@@ -31,7 +32,7 @@
      :bedroom1 bedroom1
      :bedroom2 bedroom2
      :bedroom3 bedroom3
-     :dinning dinning
+     :dining dining
      :tapestry tapestry
      :library library
 
@@ -59,16 +60,18 @@
     (room/one-way-connect :east-passage :north :house-back)
     (room/one-way-connect :house-back :south "The back door was locked.")
 
-    (room/connect :back-hall3 :west :bedroom2)
-    (room/connect :back-hall3 :east :bedroom3)
+    (room/one-way-connect :back-hall3 :west {:pre :bedroom2 :post `back-bedroom-post})
+    (room/one-way-connect :back-hall3 :east {:pre :bedroom3 :post `back-bedroom-post})
+    (room/one-way-connect :bedroom2 :east :back-hall3)
+    (room/one-way-connect :bedroom3 :west :back-hall3)
     (room/connect :back-hall3 :south :back-hall2)
-    (room/connect :back-hall2 :west :bedroom1) ; FIXME not really will be blocked
+    (room/connect :back-hall2 :west "I couldn't open the west door, it didn't have a doorknob.")
+    (room/connect :bedroom1 :east "I couldn't open the west door, it didn't have a doorknob.")
     (room/connect :back-hall2 :east :tapestry)
     (room/connect :back-hall2 :south :back-hall1)
-    (room/connect :dinning :north :tapestry)
-    (room/connect :back-hall1 :west :dinning)
-    (room/connect :back-hall1 :east :library)
-    (room/connect :library :north :bedroom1) ; FIXME will actually be hidden at first
+    (room/connect :dining :north :tapestry)
+    (room/connect :back-hall1 :west :library)
+    (room/connect :back-hall1 :east :dining)
     (room/connect :back-hall1 :south "The door was locked from the other side.")
 
     (room/connect :front-hall :west :side-hall)
