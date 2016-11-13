@@ -1,7 +1,8 @@
 (ns house.rooms.street
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
-            [advenjure.utils :as utils]))
+            [advenjure.utils :as utils]
+            [house.rooms.common :refer [mail-slot]]))
 
 (def street (->
               (room/make "Front of house"
@@ -33,13 +34,6 @@
                           :enter "It was locked."
                           :break "I couldn't break through the front door in broad daylight. Besides the door seemed pretty strong."
                           :locked true))
-
-; FIXME add paper after looking in? maybe just make a container.
-(def mail-slot (item/make ["mail slot" "slot"] "Bronze."
-                          :open "I couldn't open the slot, but maybe reach inside of it."
-                          :close false
-                          :take "I couldn't take the slot, but maybe reach inside of it."
-                          :look-in "I could reach a piece of paper, probably an envelope, near the edge of the slot."))
 
 (def v-house (item/make ["house"] "The vestibule painted a good picture of what the insides were probably like."
                         :enter "The gate door was locked."

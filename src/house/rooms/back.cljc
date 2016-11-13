@@ -74,8 +74,7 @@
 
 (def tapestry (room/make "Tapestries room" "A living room with Gobelin tapestries."))
 
-; TODO add bookshelves
-; TODO desk and a couple of reading chairs with lamps
+; TODO add bookshelves, reading sofa, desk, card cabinet
 (def library (room/make "Library" " "))
 
 (def bedroom1 (room/make "Bedroom" " "))
