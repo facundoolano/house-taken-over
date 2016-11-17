@@ -1,7 +1,8 @@
 (ns house.rooms.back
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
-            [advenjure.utils :as utils]))
+            [advenjure.utils :as utils]
+            [house.rooms.stool :refer [piano-stool]]))
 
 ; common corridor items
 (def corridor (item/make ["corridor" "passage" "passageway" "hall" "hallway"]
@@ -50,6 +51,7 @@
 
 (def oak-door (item/make ["oak door" "door"]
                          "It was massive, I think I said that. I had to find another way around."
+                         :break "It was massive, I think I said that. I had to find another way around."
                          :closed true
                          :open "The door was locked from the other side."
                          :locked true))
@@ -72,7 +74,20 @@
                        "A dining room with a big table and smaller one on the side."
                        :initial-description "The dining table was big enough to fit twenty people. There were chairs all around it and a smaller table on the side."))
 
-(def tapestry (room/make "Tapestries room" "A living room with Gobelin tapestries."))
+; TODO react to using matches on fireplace
+(def tapestry (-> (room/make "Tapestries room"
+                             "A living room with a huge tapestry covering the north wall, and two smaller ones on the opposite side, left and right of a door. There was a set of sofas around a fireplace, a drinks cabinet on a corner, and a piano.")
+                  (room/add-item (item/make ["tapestry" "tapestries"] "All three depicted battles, historical events, I supposed." :take "I could carry infinite things in my bag, but not infinitely big things.") "")
+                  (room/add-item (item/make "piano" "The lid was down and had a macramé tablecloth on top" :take "Funny." :open "Better left closed.") "")
+                  (room/add-item piano-stool "By the piano was a little stool.")
+                  (room/add-item (item/make ["tablecloth" "macramé" "macramé tablecloth" "cloth"] "Some diamond pattern." :take "It was useless.") "")
+                  (room/add-item (item/make "fireplace" "The fireplace was empty, it probably hadn't been lit in years.") "")
+                  (room/add-item (item/make ["sofa" "sofas"] "There were three of them, the larger in front of the fireplace and too shorter ones on the sides." :use "I wasn't tired.") "")
+                  (room/add-item (item/make ["drinks cabinet" "drinks" "drink" "cabinet"] "It had a wide selection of bottles and glasses of all sorts."
+                                            :take "There was no drinking on the job."
+                                            :drink "There was no drinking on the job."
+                                            :open "There was no drinking on the job."
+                                            :use "There was no drinking on the job.") "")))
 
 ; TODO add bookshelves, reading sofa, desk, card cabinet
 (def library (room/make "Library" " "))

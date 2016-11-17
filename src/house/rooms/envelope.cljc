@@ -1,4 +1,4 @@
-(ns house.rooms.common
+(ns house.rooms.envelope
   (:require [advenjure.items :as item]
             [advenjure.utils :as utils]))
 
