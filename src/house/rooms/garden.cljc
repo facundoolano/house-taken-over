@@ -1,7 +1,8 @@
 (ns house.rooms.garden
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
-            [advenjure.utils :as utils]))
+            [advenjure.utils :as utils]
+            [house.rooms.stool :refer [bath-window screwdriver]]))
 
 (def garden (->
               (room/make "Garden"
@@ -20,6 +21,7 @@
     (some #{"back door"} (:names item)) true
     (some #{"oak door"} (:names item)) "That would most likely have broken the crowbar."
     (= (:id item) "bath-window") "There was no need to break the window, just find a way to reach it."
+    (= (:id item) "bath-window-reachable") "The crowbar didn't have the proper grip for the job, it was too long."
     (some #{"window"} (:names item)) "I didn't want to draw too much attention."
     :else "I didn't want to break into that."))
 
@@ -53,10 +55,6 @@
                         :use-with {:pre `crow-pre
                                    :say "Easy job for the crowbar. The door was now open."
                                    :post `crow-post}))
-
-(def screwdriver (item/make "screwdriver" "the dust and the rust were competing to see who'd take over the thing first."
-                            :use-with "That didn't have any screws in it."
-                            :take true))
 
 (def hammer (item/make "hammer" "The head was a bit loose but still usable."
                        :take true
@@ -103,14 +101,8 @@
                   (room/add-item (item/make "house" "It looked even bigger from this side."
                                                     :enter `can-enter
                                                     :break "Perhaps with the proper tooling."))))
-(def bath-window (item/make "window"
-                            "It was too high to look inside from where I was standing."
-                            :look-in "It was too high to look inside from where I was standing."
-                            :open "I could reach the border of the window but not open it from the ground level."
-                            :use "I could reach the border of the window but not open it from the ground level."
-                            :enter "I could reach the border of the window but not open it from the ground level."
-                            :break "There was no need to break the window, just find a way to reach it."
-                            :id "bath-window"))
+
+; FIXME add wall, maybe accept use with stool
 (def west-passage (->
                     (room/make "West passage"
                                "The western passage ended up in a wall with a high window, probably of a bathroom.")
