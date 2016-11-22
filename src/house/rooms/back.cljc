@@ -2,7 +2,7 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.rooms.stool :refer [piano-stool]]))
+            [house.puzzles.bath-window :refer [piano-stool]]))
 
 ; common corridor items
 (def corridor (item/make ["corridor" "passage" "passageway" "hall" "hallway"]
@@ -165,6 +165,7 @@
               (room/add-item shelves "")
               (room/add-item parks-book "")))
 
+; FIXME have both definitions already in room map, and just change the connections
 ; TODO lighting up will replace the room
 ; lighten room will have a connection to east to corridor
 (def bedroom1 (room/make "Hidden room" "It was completely dark." :visited true))

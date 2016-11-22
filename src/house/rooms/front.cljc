@@ -2,7 +2,7 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.rooms.envelope :refer [mailbox]]))
+            [house.puzzles.envelope :refer [mailbox]]))
 
 
 (def living (->

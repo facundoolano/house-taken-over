@@ -2,7 +2,7 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.rooms.stool :refer [bath-window screwdriver]]))
+            [house.puzzles.bath-window :refer [bath-window screwdriver]]))
 
 (def garden (->
               (room/make "Garden"

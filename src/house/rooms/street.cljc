@@ -2,7 +2,7 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.rooms.envelope :refer [mail-slot]]))
+            [house.puzzles.envelope :refer [mail-slot]]))
 
 (def street (->
               (room/make "Front of house"
