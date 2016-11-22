@@ -16,6 +16,6 @@
                     "\n \nJorge Luis Borges."))
 
 (defn run-game []
-  (let [game-state (game/make room-map :garden) ;FIXME :street)
+  (let [game-state (game/make room-map :back-hall3) ;FIXME :street)
         finished? (fn [gs] (:finished gs))]
       (game/run game-state finished? init-text verb-map)))

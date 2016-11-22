@@ -69,10 +69,36 @@
                   (room/add-item (make-door "east door" :dining) "")
                   (room/add-item oak-door "")))
 
-; TODO add chairs and tables
-(def dining (room/make "Dining room"
-                       "A dining room with a big table and smaller one on the side."
-                       :initial-description "The dining table was big enough to fit twenty people. There were chairs all around it and a smaller table on the side."))
+(def candles (item/make ["box of candles" "candles"] "Fancy." :take true))
+
+(def top-drawer (item/make ["drawer" "top drawer"]
+                           "There was nothing special about it."
+                           :open "Tablecloths, placemats and napkins."
+                           :look-in "Tablecloths, placemats and napkins."))
+
+(defn post-open
+  [old gs]
+  (let [drawer (utils/find-first gs "bottom drawer")
+        new-drawer (update-in drawer [:open] dissoc :say)]
+    (utils/replace-item gs drawer new-drawer)))
+
+(def bottom-drawer (item/make ["drawer" "bottom drawer"]
+                              "There was nothing special about it."
+                              :closed true
+                              :open {:pre true
+                                     :say "A lot of silverware; utensils I didn’t knew existed. Also a box of candles."
+                                     :post `post-open}
+                              :items #{candles}))
+
+(def dining (->
+              (room/make "Dining room"
+                         "A dining room with a table big enough to fit twenty people. There were ornate chairs all around it and a smaller table on the side. By the wall was a dinnerware cabinet with two drawers.")
+              (room/add-item (item/make ["cabinet" "dinnerware cabinet"] "It had three shelves full of dinnerware and two drawers." :open "You mean a drawer?") "")
+              (room/add-item top-drawer "")
+              (room/add-item bottom-drawer "")
+              (room/add-item (item/make ["dining table" "table"] "I lived in places smaller than that table.") "")
+              (room/add-item (item/make ["table" "small table"] "I guessed it was used to hold dishes during dinner.") "")
+              (room/add-item (item/make ["chair" "chairs"] "Dark wood mathcing the table. Arms and legs had elaborate carvings." :take "Those chairs were way too heavy to carry around.") "")))
 
 ; TODO react to using matches on fireplace
 (def tapestry (-> (room/make "Tapestries room"
@@ -89,13 +115,54 @@
                                             :open "There was no drinking on the job."
                                             :use "There was no drinking on the job.") "")))
 
-; TODO add bookshelves, reading sofa, desk, card cabinet
-(def library (room/make "Library" " "))
+; TODO move to one file, add use (open as synonym)
+(def catalog (item/make ["card cabinet" "cabinet" "catalog" "card catalog"]
+                        "It was a card catalog of the library, consisting of a set of labeled small drawers. I could use it to search the books for a specific topic."))
+
+(def pipe (item/make ["pipe" "briar pipe"] "The wood was shiny."
+                     :take "I wasn't touching that thing, it probably had several generations of germs growing in it."
+                     :use "I wasn't touching that thing, it probably had several generations of germs growing in it."))
+
+; TODO add the easter egg
+(def parks-book (item/make ["book" "book on the table" "book on table"] "It was open a few pages before the end."
+                           :take "No need to take it."
+                           :read "TL;DR"))
+
+(def armchair (item/make ["armchair" "green velvet armchair" "velvet armchair"]
+                         "Green velvet. It had its back toward the door, as to avoid the possibility of an interruption."
+                         :use "I wasn't tired."
+                         :take "Way too heavy to carry around."))
+
+; TODO add interactions: pull/move adds the room connection
+; Pulling the frame of the portrait revealed it was fixed to a door that led to a hidden room.
+(def portrait (item/make ["portrait" "painting"]
+                         "It depicted a man in that very same room, sitting on the green velvet armchair, smoking a pipe with a severe look in his eyes. It must have been painted by the end of the 19th century, judging by the clothes."
+                         :pull "FIXME"
+                         :move "FIXME"
+                         :push "It didn't move in that direction."
+                         :take "Kind of big to fit in my bag."))
+
+(def shelves (item/make ["book" "books on the shelf" "books on shelf" "book on the shelf" "book on shelf" "books" "shelves" "shelf" "bookshelves" "bookcase"]
+                        "More books than a man could possibly read in a lifetime."
+                        :take "There were too many of them, better to use the catalog."))
+
+(def library (->
+              (room/make "Library"
+                         "A library with bookshelves floor to ceiling, only interrupted by a window, the door to the corridor and a large portrait of a man."
+                         :initial-description "A quick glimpse was enough to realize that the library was a prominent room in the house. The bookshelves went floor to ceiling on each wall, only interrupted by a window —notably larger than in other rooms—, the door to the corridor and a full-size portrait of a man on the northern wall.")
+              (room/add-item catalog "Next to the door was a card cabinet.")
+              (room/add-item (item/make "desk" "Over the desk was a briar pipe and an open book.") "Facing the window: a desk and a green velvet armchair.")
+              (room/add-item (item/make "window" "The window was notably bigger than in the other rooms." :open "That was pointless.") "")
+              (room/add-item pipe "")
+              (room/add-item armchair "")
+              (room/add-item portrait "")
+              (room/add-item shelves "")
+              (room/add-item parks-book "")))
 
 (def bedroom1 (room/make "Bedroom" " "))
 
 ; TODO add mentioned items
-; bedroom 2 and three are mirrored
+; bedroom 2 and 3 are mirrored
 (def base-bedroom (room/make "Bedroom"
                              "An uninhabited bedroom. It had a wide bed and a night table, an armoire, a desk with its chair. A single window mildly lighted the room."
                              :initial-description "The bedroom was impeccably clean and far from being empty, yet I got the clear impression that it hadn't been occupied in years… It had a wide bed and a night table, an armoire, a desk with its chair. A single window mildly lighted the room."))
