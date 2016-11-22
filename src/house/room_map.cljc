@@ -66,7 +66,6 @@
     (room/one-way-connect :bedroom3 :west :back-hall3)
     (room/connect :back-hall3 :south :back-hall2)
     (room/connect :back-hall2 :west "I couldn't open the west door, it didn't have a doorknob.")
-    (room/connect :bedroom1 :east "I couldn't open the west door, it didn't have a doorknob.")
     (room/connect :back-hall2 :east :tapestry)
     (room/connect :back-hall2 :south :back-hall1)
     (room/connect :dining :north :tapestry)

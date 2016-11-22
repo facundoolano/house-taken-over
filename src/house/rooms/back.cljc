@@ -133,12 +133,18 @@
                          :use "I wasn't tired."
                          :take "Way too heavy to carry around."))
 
-; TODO add interactions: pull/move adds the room connection
-; Pulling the frame of the portrait revealed it was fixed to a door that led to a hidden room.
+(defn reveal-room [old gs]
+  (update-in gs [:room-map] room/connect :library :north :bedroom1))
+
+
 (def portrait (item/make ["portrait" "painting"]
                          "It depicted a man in that very same room, sitting on the green velvet armchair, smoking a pipe with a severe look in his eyes. It must have been painted by the end of the 19th century, judging by the clothes."
-                         :pull "FIXME"
-                         :move "FIXME"
+                         :pull {:pre true
+                                :say "Pulling the frame of the portrait revealed it was fixed to a door that led to a hidden room."
+                                :post `reveal-room}
+                         :move {:pre true
+                                :say "Pulling the frame of the portrait revealed it was fixed to a door that led to a hidden room."
+                                :post `reveal-room}
                          :push "It didn't move in that direction."
                          :take "Kind of big to fit in my bag."))
 
@@ -159,7 +165,9 @@
               (room/add-item shelves "")
               (room/add-item parks-book "")))
 
-(def bedroom1 (room/make "Bedroom" " "))
+; TODO lighting up will replace the room
+; lighten room will have a connection to east to corridor
+(def bedroom1 (room/make "Hidden room" "It was completely dark." :visited true))
 
 ; TODO add mentioned items
 ; bedroom 2 and 3 are mirrored
