@@ -4,7 +4,7 @@
             [advenjure.utils :as utils]
             [house.rooms.street :refer [street vestibule house-side corner alley]]
             [house.rooms.garden :refer [garden shed house-back west-passage east-passage]]
-            [house.rooms.back :refer [back-hall1 back-hall2 back-hall3 bedroom1
+            [house.rooms.back :refer [back-hall1 back-hall2 back-hall3 hidden-room dark-room
                                       bedroom2 bedroom3 tapestry library dining
                                       back-bedroom-post]]
 
@@ -29,7 +29,8 @@
      :back-hall3 back-hall3
      :back-hall2 back-hall2
      :back-hall1 back-hall1
-     :bedroom1 bedroom1
+     :hidden-room hidden-room
+     :dark-room dark-room
      :bedroom2 bedroom2
      :bedroom3 bedroom3
      :dining dining
@@ -66,12 +67,15 @@
     (room/one-way-connect :bedroom3 :west :back-hall3)
     (room/connect :back-hall3 :south :back-hall2)
     (room/connect :back-hall2 :west "I couldn't open the west door, it didn't have a doorknob.")
+    (room/one-way-connect :hidden-room :east :back-hall2) ;only visible when room is lit
     (room/connect :back-hall2 :east :tapestry)
     (room/connect :back-hall2 :south :back-hall1)
     (room/connect :dining :north :tapestry)
     (room/connect :back-hall1 :west :library)
     (room/connect :back-hall1 :east :dining)
     (room/connect :back-hall1 :south "The door was locked from the other side.")
+
+    (room/connect :front-hall :north :back-hall1) ; FIXME just for testing
 
     (room/connect :front-hall :west :side-hall)
     (room/connect :side-hall :west :bathroom)

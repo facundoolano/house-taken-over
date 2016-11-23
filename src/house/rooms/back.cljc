@@ -3,7 +3,8 @@
             [advenjure.items :as item]
             [advenjure.utils :as utils]
             [house.puzzles.bath-window :refer [piano-stool]]
-            [house.puzzles.catalog :refer [catalog]]))
+            [house.puzzles.catalog :refer [catalog]]
+            [house.puzzles.candles :refer [candles]]))
 
 ; common corridor items
 (def corridor (item/make ["corridor" "passage" "passageway" "hall" "hallway"]
@@ -70,8 +71,6 @@
                   (room/add-item (make-door "east door" :dining) "")
                   (room/add-item oak-door "")))
 
-(def candles (item/make ["box of candles" "candles"] "Fancy." :take true))
-
 (def top-drawer (item/make ["drawer" "top drawer"]
                            "There was nothing special about it."
                            :open "Tablecloths, placemats and napkins."
@@ -130,8 +129,13 @@
                          :use "I wasn't tired."
                          :take "Way too heavy to carry around."))
 
+; FIXME when hooks available, maybe smarter to make the room decision there
 (defn reveal-room [old gs]
-  (update-in gs [:room-map] room/connect :library :north :bedroom1))
+  (let [target-room (if (utils/find-first gs "lit candle") :hidden-room :dark-room)]
+    (println "target is" target-room)
+    (-> gs
+      (update-in [:events] conj :found-hidden-room)
+      (update-in [:room-map] room/connect :library :north target-room))))
 
 
 (def portrait (item/make ["portrait" "painting"]
@@ -162,10 +166,10 @@
               (room/add-item shelves "")
               (room/add-item parks-book "")))
 
-; FIXME have both definitions already in room map, and just change the connections
-; TODO lighting up will replace the room
-; lighten room will have a connection to east to corridor
-(def bedroom1 (room/make "Hidden room" "It was completely dark." :visited true))
+(def dark-room (room/make "Hidden room" "It was completely dark." :known true))
+
+; TODO add descriptions/items
+(def hidden-room (room/make "Hidden room" "The candle lighted a bedroom." :known true))
 
 ; TODO add mentioned items
 ; bedroom 2 and 3 are mirrored

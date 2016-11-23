@@ -1,7 +1,8 @@
 (ns house.rooms.middle
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
-            [advenjure.utils :as utils]))
+            [advenjure.utils :as utils]
+            [house.puzzles.candles :refer [matches]]))
 
 (def front-hall (->
                  (room/make "Passageway"
@@ -14,4 +15,6 @@
 ; TODO bath, toilette, lavatory, cabinet
 (def bathroom (room/make "Bath" "The bathroom."))
 
-(def kitchen (room/make "Kitchen" " "))
+(def kitchen (->
+              (room/make "Kitchen" "A kitchen.") ; TODO
+              (room/add-item matches)))
