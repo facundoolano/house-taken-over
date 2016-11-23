@@ -2,7 +2,8 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.puzzles.bath-window :refer [piano-stool]]))
+            [house.puzzles.bath-window :refer [piano-stool]]
+            [house.puzzles.catalog :refer [catalog]]))
 
 ; common corridor items
 (def corridor (item/make ["corridor" "passage" "passageway" "hall" "hallway"]
@@ -114,10 +115,6 @@
                                             :drink "There was no drinking on the job."
                                             :open "There was no drinking on the job."
                                             :use "There was no drinking on the job.") "")))
-
-; TODO move to one file, add use (open as synonym)
-(def catalog (item/make ["card cabinet" "cabinet" "catalog" "card catalog"]
-                        "It was a card catalog of the library, consisting of a set of labeled small drawers. I could use it to search the books for a specific topic."))
 
 (def pipe (item/make ["pipe" "briar pipe"] "The wood was shiny."
                      :take "I wasn't touching that thing, it probably had several generations of germs growing in it."
