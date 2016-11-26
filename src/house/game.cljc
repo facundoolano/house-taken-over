@@ -1,5 +1,6 @@
 (ns house.game
   (:require [advenjure.game :as game]
+            [advenjure.plugins.map :refer [map-on-every-room]]
             [advenjure.items :as item]
             [house.room-map :refer [room-map]]
             [advenjure.verbs :refer [make-item-handler make-compound-item-handler make-say-verb]]
@@ -33,7 +34,8 @@
                     "\n \nGeorges Perec, \"Life: A User's Manual\"."))
 
 (defn run-game []
-  (let [game-state (game/make room-map :back-hall3) ;FIXME :street)
+  (let [game-state (-> (game/make room-map :back-hall3) ;FIXME :street
+                       (game/use-plugin map-on-every-room))
         finished? (fn [gs] (:finished gs))]
     (game/run game-state
               finished?

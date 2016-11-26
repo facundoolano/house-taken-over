@@ -22,8 +22,6 @@
       (str "Browsing the books I found this:\n \n" extract)
       "I found nothing about that in the catalog.")))
 
-
-; TODO add use (open as synonym)
 (def catalog (item/make ["card cabinet" "cabinet" "catalog" "card catalog"]
                         "It was a card catalog of the library, consisting of a set of labeled small drawers. I could use it to search the books for a specific topic."
                         :use `search-catalog
