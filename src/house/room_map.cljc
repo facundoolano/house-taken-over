@@ -4,7 +4,7 @@
             [advenjure.utils :as utils]
             [house.rooms.street :refer [street vestibule house-side corner alley]]
             [house.rooms.garden :refer [garden shed house-back west-passage east-passage]]
-            [house.rooms.back :refer [back-hall1 back-hall2 back-hall3 hidden-room dark-room
+            [house.rooms.back :refer [back-hall1 back-hall2 back-hall3 hidden-room
                                       bedroom2 bedroom3 tapestry library dining
                                       back-bedroom-post]]
 
@@ -30,7 +30,6 @@
      :back-hall2 back-hall2
      :back-hall1 back-hall1
      :hidden-room hidden-room
-     :dark-room dark-room
      :bedroom2 bedroom2
      :bedroom3 bedroom3
      :dining dining

@@ -22,24 +22,19 @@
     true
     "That wouldn't light a candle."))
 
+; light source for the dark plugin
 (def lit-candle (item/make ["lit candle" "candle"]
                            "It wouldn't last forever."
                            :use "It was already on."
                            :light "It was already on."
                            :light-with "It was already on."
+                           :lit true
                            :turns-left 10)) ; TODO use a middleware to decrease on each turn until it burns out
 
 (defn post-light
-  "Add a lit candle item to the inventory.
-  If secret room already discovered, replace the dark room with the lit one.
-  If it's currently there perform a room change."
+  "Add a lit candle item to the inventory."
   [old gs]
-  (let [found-room? #((:events %) :found-hidden-room)
-        is-in-room? #(= (:current-room %) :dark-room)]
-    (cond-> gs
-      (found-room? gs) (update-in [:room-map] room/connect :library :north :hidden-room)
-      (is-in-room? gs) (change-rooms :hidden-room)
-      :always (update-in [:inventory] conj lit-candle))))
+  (update-in gs [:inventory] conj lit-candle))
 
 
 (def matches (item/make ["box of matches" "match box" "matchbox" "matches" "match"]

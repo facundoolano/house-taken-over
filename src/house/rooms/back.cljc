@@ -129,13 +129,8 @@
                          :use "I wasn't tired."
                          :take "Way too heavy to carry around."))
 
-; FIXME when hooks available, maybe smarter to make the room decision there
 (defn reveal-room [old gs]
-  (let [target-room (if (utils/find-first gs "lit candle") :hidden-room :dark-room)]
-    (println "target is" target-room)
-    (-> gs
-      (update-in [:events] conj :found-hidden-room)
-      (update-in [:room-map] room/connect :library :north target-room))))
+  (update-in gs [:room-map] room/connect :library :north :hidden-room))
 
 
 (def portrait (item/make ["portrait" "painting"]
@@ -166,10 +161,8 @@
               (room/add-item shelves "")
               (room/add-item parks-book "")))
 
-(def dark-room (room/make "Hidden room" "It was completely dark." :known true))
-
 ; TODO add descriptions/items
-(def hidden-room (room/make "Hidden room" "The candle lighted a bedroom." :known true))
+(def hidden-room (room/make "Hidden room" "The candle lighted a bedroom." :known true :dark true))
 
 ; TODO add mentioned items
 ; bedroom 2 and 3 are mirrored

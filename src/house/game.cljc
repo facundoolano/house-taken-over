@@ -1,6 +1,7 @@
 (ns house.game
   (:require [advenjure.game :as game]
             [advenjure.plugins.map :refer [map-on-every-room]]
+            [advenjure.plugins.dark :refer [dark-room]]
             [advenjure.items :as item]
             [house.room-map :refer [room-map]]
             [advenjure.verbs :refer [make-item-handler make-compound-item-handler make-say-verb]]
@@ -33,10 +34,12 @@
                     "\n \nDespite appearances, puzzling is not a solitary game: every move the puzzler makes, the puzzlemaker has made before; every piece the puzzler picks up, and picks up again, and studies and strokes, every combination he tries, and tries a second time, every blunder and every insight, each hope and each discouragement have all been designed, calculated, and decided by the other."
                     "\n \nGeorges Perec, \"Life: A User's Manual\"."))
 
+(def game-state (-> (game/make room-map :back-hall3) ;FIXME :street
+                    (game/use-plugin map-on-every-room)
+                    (game/use-plugin dark-room)))
+
 (defn run-game []
-  (let [game-state (-> (game/make room-map :back-hall3) ;FIXME :street
-                       (game/use-plugin map-on-every-room))
-        finished? (fn [gs] (:finished gs))]
+  (let [finished? (fn [gs] (:finished gs))]
     (game/run game-state
               finished?
               :start-message init-text
