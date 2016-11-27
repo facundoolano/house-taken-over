@@ -4,6 +4,7 @@
             [advenjure.plugins.dark :refer [dark-room]]
             [advenjure.items :as item]
             [house.room-map :refer [room-map]]
+            [house.puzzles.candles :refer [burn-candle-plugin]]
             [advenjure.verbs :refer [make-item-handler make-compound-item-handler make-say-verb]]
             [advenjure.verb-map :refer [add-verb]]))
 
@@ -36,6 +37,7 @@
 
 (def game-state (-> (game/make room-map :back-hall3) ;FIXME :street
                     (game/use-plugin map-on-every-room)
+                    (game/use-plugin burn-candle-plugin)
                     (game/use-plugin dark-room)))
 
 (defn run-game []
