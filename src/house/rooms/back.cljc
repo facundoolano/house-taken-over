@@ -4,7 +4,7 @@
             [advenjure.utils :as utils]
             [house.puzzles.bath-window :refer [piano-stool]]
             [house.puzzles.catalog :refer [catalog]]
-            [house.puzzles.candles :refer [candles]]))
+            [house.puzzles.candles :refer [candles candlestick]]))
 
 ; common corridor items
 (def corridor (item/make ["corridor" "passage" "passageway" "hall" "hallway"]
@@ -162,7 +162,9 @@
               (room/add-item parks-book "")))
 
 ; TODO add descriptions/items
-(def hidden-room (room/make "Hidden room" "The candle lighted a bedroom." :known true :dark true))
+(def hidden-room (->
+                  (room/make "Hidden room" "The candle lighted a bedroom." :known true :dark true)
+                  (room/add-item candlestick "There was a candlestick on the night table.")))
 
 ; TODO add mentioned items
 ; bedroom 2 and 3 are mirrored

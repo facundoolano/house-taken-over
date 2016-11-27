@@ -4,23 +4,47 @@
             [advenjure.change-rooms :refer [change-rooms]]
             [advenjure.utils :as utils]))
 
+; FIXME put on/in should be synonym
+(def candlestick (item/make ["candlestick" "candle stick"] "Bronze."
+                             :take "There was no use in carrying that around."))
+
+(def candlestick-with-candle (item/make ["candlestick" "candle stick" "candle"]
+                                        "The candle faintly lighted the room."
+                                        :take "There was no use in carrying that around."
+                                        :lit true))
+
+(defn pre-candlestick
+  [gs item]
+  (cond
+    (and (some #{"candlestick"} (:names item)) (:lit item)) "It had a candle already."
+    (some #{"candlestick"} (:names item)) true
+    :else "That couldn't hold a candle."))
+
+(defn post-candlestick
+  [old gs]
+  (let [candle (utils/find-first gs "lit candle")
+        candlestick (utils/find-first gs "candlestick")]
+    (-> gs
+      (utils/remove-item candle)
+      (utils/replace-item candlestick candlestick-with-candle))))
+
 
 (defn light-match [gs]
   (if (= :dark-room (:current-room gs))
     "The match briefly lighted what appeared to be a bedroom, but then it burned out."
     "I lighted a match, but it quickly burnt out."))
 
-; FIXME not if already carrying one
 (defn pre-match [gs item]
-  (if (some #{"candles"} (:names item))
-    true
-    "I didn't want to burn that."))
+  (cond
+    (utils/find-first gs "lit candle") "I already had a lit candle."
+    (some #{"candles"} (:names item)) true
+    :else "I didn't want to burn that."))
 
-; FIXME not if already carrying one
 (defn pre-candle [gs item]
-  (if (some #{"box of matches"} (:names item))
-    true
-    "That wouldn't light a candle."))
+  (cond
+    (utils/find-first gs "lit candle") "I already had a lit candle."
+    (some #{"box of matches"} (:names item)) true
+    :else "That wouldn't light a candle."))
 
 ; light source for the dark plugin
 (def lit-candle (item/make ["lit candle" "candle"]
@@ -29,7 +53,10 @@
                            :light "It was already on."
                            :light-with "It was already on."
                            :lit true
-                           :turns-left 5))
+                           :turns-left 5
+                           :use-with {:pre `pre-candlestick
+                                      :say "I put the candle on the candlestick."
+                                      :post `post-candlestick}))
 
 (defn burn-candle-hook
   [game-state]
