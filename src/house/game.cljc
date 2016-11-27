@@ -14,12 +14,16 @@
 (def light (make-item-handler "light" :light))
 (def light-with (make-compound-item-handler "light" :light-with))
 
+(def put-in (make-compound-item-handler "put" :put))
+
 (def verb-map (-> {}
                   (add-verb ["^break (?<item>.*)" "^break in (?<item>.*)"  "^break into (?<item>.*)" "^break$"] break)
                   (add-verb ["^drop (?<item>.*)" "^drop$"] drop_)
                   (add-verb ["^light (?<item>.*)" "^light$"
                              "^turn (?<item>.*)" "^turn on (?<item>.*)"
                              "^turn (?<item>.*) on" "^turn on$" "^turn$"] light)
+                  (add-verb ["^put (?<item1>.*) in (?<item2>.*)" "^put (?<item1>.*) in$"
+                             "^put (?<item1>.*) on (?<item2>.*)" "^put (?<item1>.*) on$"] put-in)
                   (add-verb ["^light (?<item1>.*) with (?<item2>.*)" "^light (?<item1>.*) with$"
                              "^turn (?<item1>.*) with (?<item2>.*)"
                              "^turn on (?<item1>.*) with (?<item2>.*)"

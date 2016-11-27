@@ -4,7 +4,6 @@
             [advenjure.change-rooms :refer [change-rooms]]
             [advenjure.utils :as utils]))
 
-; FIXME put on/in should be synonym
 (def candlestick (item/make ["candlestick" "candle stick"] "Bronze."
                              :take "There was no use in carrying that around."))
 
@@ -18,6 +17,7 @@
   (cond
     (and (some #{"candlestick"} (:names item)) (:lit item)) "It had a candle already."
     (some #{"candlestick"} (:names item)) true
+    (some #{"candle"} (:names item)) "Maybe the lit one."
     :else "That couldn't hold a candle."))
 
 (defn post-candlestick
@@ -56,7 +56,10 @@
                            :turns-left 5
                            :use-with {:pre `pre-candlestick
                                       :say "I put the candle on the candlestick."
-                                      :post `post-candlestick}))
+                                      :post `post-candlestick}
+                           :put {:pre `pre-candlestick
+                                 :say "I put the candle on the candlestick."
+                                 :post `post-candlestick}))
 
 (defn burn-candle-hook
   [game-state]
