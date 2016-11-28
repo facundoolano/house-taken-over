@@ -5,7 +5,7 @@
             [house.puzzles.candles :refer [matches]]))
 
 (def front-hall (->
-                 (room/make "Passageway"
+                 (room/make "Corridor"
                             "A corridor ending in a massive oak door and a narrow passageway turning west.")
 
                  (room/add-item (item/make ["door" "oak door"] "It was massive, I think I said that.") "")))

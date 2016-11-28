@@ -4,6 +4,7 @@
             [advenjure.utils :as utils]
             [house.puzzles.bath-window :refer [piano-stool]]
             [house.puzzles.catalog :refer [catalog]]
+            [house.puzzles.safe :refer [safe-portrait]]
             [house.puzzles.candles :refer [candles candlestick]]))
 
 ; common corridor items
@@ -100,7 +101,7 @@
               (room/add-item (item/make ["table" "small table"] "I guessed it was used to hold dishes during dinner.") "")
               (room/add-item (item/make ["chair" "chairs"] "Dark wood mathcing the table. Arms and legs had elaborate carvings." :take "Those chairs were way too heavy to carry around.") "")))
 
-; TODO react to using matches on fireplace
+; TODO react to using matches on fireplace?
 (def tapestry (-> (room/make "Tapestries room"
                              "A living room with a huge tapestry covering the north wall, and two smaller ones on the opposite side, left and right of a door. There was a set of sofas around a fireplace, a drinks cabinet on a corner, and a piano.")
                   (room/add-item (item/make ["tapestry" "tapestries"] "All three depicted battles, historical events, I supposed." :take "I could carry infinite things in my bag, but not infinitely big things.") "")
@@ -153,7 +154,7 @@
                          "A library with bookshelves floor to ceiling, only interrupted by a window, the door to the corridor and a large portrait of a man."
                          :initial-description "A quick glimpse was enough to realize that the library was a prominent room in the house. The bookshelves went floor to ceiling on each wall, only interrupted by a window —notably larger than in other rooms—, the door to the corridor and a full-size portrait of a man on the northern wall.")
               (room/add-item catalog "Next to the door was a card cabinet.")
-              (room/add-item (item/make "desk" "Over the desk was a briar pipe and an open book.") "Facing the window: a desk and a green velvet armchair.")
+              (room/add-item (item/make ["side table" "table"] "On the side table were a briar pipe and an open book.") "Facing the window: a green velvet armchair with a side table.")
               (room/add-item (item/make "window" "The window was notably bigger than in the other rooms." :open "That was pointless.") "")
               (room/add-item pipe "")
               (room/add-item armchair "")
@@ -161,10 +162,22 @@
               (room/add-item shelves "")
               (room/add-item parks-book "")))
 
-; TODO add descriptions/items
+; TODO add front door keys to drawer
 (def hidden-room (->
-                  (room/make "Hidden room" "The candle lighted a bedroom." :known true :dark true)
-                  (room/add-item candlestick "There was a candlestick on the night table.")))
+                  (room/make "Hidden room" "An old and musty study."
+                             :initial-description "The candle lighted an old study which was evidently excluded from the house cleaning routines; a musty smell and a thick layer of dust made it clear that no one had walked through the door in a long time."
+                             :known true
+                             :dark true)
+                  (room/add-item (item/make "desk" "It had one drawer.") "There was a wide desk in the center of the room and behind it a portrait of an old man.")
+                  (room/add-item (item/make "door" "The same as in the other rooms.") "A door led east to the corridor.")
+                  (room/add-item (item/make ["drawer" "desk drawer"] "Nothing special about it"
+                                            :closed true :item #{}) "")
+                  (room/add-item safe-portrait "")
+                  (room/add-item candlestick "On the desk were a candlestick and book.")
+                  (room/add-item (item/make ["book" "book on desk"]
+                                            "The book was titled “The Conquest of the Desert”."
+                                            :read "It was a history book about some 19th century military campaign: “The Conquest of the Desert”."
+                                            :take "I had no plans to read it.") "On the desk were a candlestick and book.")))
 
 ; TODO add mentioned items
 ; bedroom 2 and 3 are mirrored
