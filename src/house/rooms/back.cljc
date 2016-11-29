@@ -165,7 +165,7 @@
 ; TODO add front door keys to drawer
 (def hidden-room (->
                   (room/make "Hidden room" "An old and musty study."
-                             :initial-description "The candle lighted an old study which was evidently excluded from the house cleaning routines; a musty smell and a thick layer of dust made it clear that no one had walked through the door in a long time."
+                             :initial-description "The candlelight exposed an old study which was evidently excluded from the house cleaning routines; a musty smell and a thick layer of dust made it clear that no one had walked through the door in a long time."
                              :known true
                              :dark true)
                   (room/add-item (item/make "desk" "It had one drawer.") "There was a wide desk in the center of the room and behind it a portrait of an old man.")
