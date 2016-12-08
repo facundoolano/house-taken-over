@@ -170,8 +170,8 @@
                              :dark true)
                   (room/add-item (item/make "desk" "It had one drawer.") "There was a wide desk in the center of the room and behind it a portrait of an old man.")
                   (room/add-item (item/make "door" "The same as in the other rooms.") "A door led east to the corridor.")
-                  (room/add-item (item/make ["drawer" "desk drawer"] "Nothing special about it"
-                                            :closed true :item #{}) "")
+                  (room/add-item (item/make ["drawer" "desk drawer"] "Nothing special about it."
+                                            :closed true :items #{}) "")
                   (room/add-item safe-portrait "")
                   (room/add-item candlestick "On the desk were a candlestick and book.")
                   (room/add-item (item/make ["book" "book on desk"]
