@@ -17,7 +17,12 @@
 (defn update-garden
   "Set the house back as not visited to say it's dark next time the player goes outside."
   [old gs]
-  (update-in gs [:room-map :house-back] assoc :visited false))
+  (let [east-items (get-in gs [:room-map :east-passage :items])
+        window (first (item/get-from east-items "window"))
+        new-window (merge window {:description "The drapes were closed." :look-in "The drapes were closed."})]
+    (-> gs
+      (update-in [:room-map :house-back] assoc :visited false)
+      (update-in [:room-map :east-passage :items] item/replace-from window new-window))))
 
 (def bath-window-open (item/make ["window" "bathroom window"]
                                  "It led to a bathroom and was now open."

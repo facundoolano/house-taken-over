@@ -117,12 +117,13 @@
                                "The western passage ended up in a wall with a high window, probably of a bathroom.")
                     (room/add-item bath-window "")))
 
+(def room-window (item/make "window"
+                            "It was a woman’s bedroom by the look of the furniture. She was on a sofa, knitting. A man was reading next to her. They didn’t seem to pay much attention to each other."
+                            :look-in "It was a woman’s bedroom by the look of the furniture. She was on a sofa, knitting. A man was reading next to her. They didn’t seem to pay much attention to each other."
+                            :break "I didn't want to draw too much attention."
+                            :enter "I didn't want to draw too much attention."))
+
 (def east-passage (->
                     (room/make "East passage"
                                "The eastern passage ended up in the back of one of the bedrooms I saw from the street. It had a window.")
-                    (room/add-item (item/make "window"
-                                              "It was a woman’s bedroom by the look of the furniture. She was on a sofa, knitting. A man was reading next to her. They didn’t seem to pay much attention to each other."
-                                              :look-in "It was a woman’s bedroom by the look of the furniture. She was on a sofa, knitting. A man was reading next to her. They didn’t seem to pay much attention to each other."
-                                              :break "I didn't want to draw too much attention."
-                                              :enter "I didn't want to draw too much attention.")
-                                  "")))
+                    (room/add-item room-window "")))
