@@ -7,7 +7,7 @@
 (def garden (->
               (room/make "Garden"
                          "The garden ended on a long wall, partially covered by a creeping fig."
-                         :initial-description "I made sure that no one was looking, and climbed up the fig.\nI got down on the other side of the wall, in a garden.")
+                         :initial-description "I made sure that no one was looking, and climbed up the fig.\n \nI got down on the other side of the wall, in a garden.")
               (room/add-item (item/make "wall" "A plastered brick wall, about twice my height." :climb-up "The fig wasn't strong enough to climb up on this side of the wall.") "")
               (room/add-item (item/make ["creeping fig" "fig"] "It was a bit more under control than on the other side." :climb-up "The fig wasn't strong enough to climb up on this side of the wall.") "")
               (room/add-item (item/make ["path" "stone path"] "It led back to the house.") "A stone path led south to the back entrance of the house.")
@@ -29,7 +29,7 @@
   "Open the door and connect the rooms."
   [old gs]
   (let [door (utils/find-first gs "door")
-        new-door (item/make ["back door" "door"]
+        new-door (item/make ["door" "back-door"]
                             "You could hardly tell that I, um, \"unlocked\" it."
                             :open true
                             :enter :back-hall3)
@@ -38,6 +38,13 @@
       (-> gs
         (assoc :room-map new-map)
         (utils/replace-item door new-door)))))
+
+(defn crow-use-post
+  "set door as unlocked and call crow-post"
+  [old gs]
+  (let [door (utils/find-first gs "door")
+        new-door (dissoc door :locked)]
+    (crow-post old (utils/replace-item gs door new-door))))
 
 (def back-door (item/make ["door" "back door"]
                           "It didn't look particularly tough."
@@ -54,7 +61,7 @@
                         :unlocks back-door
                         :use-with {:pre `crow-pre
                                    :say "Easy job for the crowbar. The door was now open."
-                                   :post `crow-post}))
+                                   :post `crow-use-post}))
 
 (def hammer (item/make "hammer" "The head was a bit loose but still usable."
                        :take true
@@ -96,11 +103,13 @@
 (def house-back (->
                   (room/make "Back of house"
                              "The stone path crossed the garden up to the back door of the house. There was a weedy passage on either side, between the building and the garden wall."
+                             :initial-description "It was getting dark outside."
+                             :visited true ; I make it visited by default b/c I'll save initial-description for later on, when it's dark.
                              :known true)
                   (room/add-item back-door "")
                   (room/add-item (item/make "house" "It looked even bigger from this side."
                                                     :enter `can-enter
-                                                    :break "Perhaps with the proper tooling."))))
+                                                    :break "Perhaps with the proper tooling.") "")))
 
 ; FIXME add wall, maybe accept use with stool
 (def west-passage (->

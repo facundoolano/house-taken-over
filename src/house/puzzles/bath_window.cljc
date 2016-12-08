@@ -14,13 +14,18 @@
                             :break "There was no need to break the window, just find a way to reach it."
                             :id "bath-window"))
 
+(defn update-garden
+  "Set the house back as not visited to say it's dark next time the player goes outside."
+  [old gs]
+  (update-in gs [:room-map :house-back] assoc :visited false))
+
 (def bath-window-open (item/make ["window" "bathroom window"]
                                  "It led to a bathroom and was now open."
                                  :look-in "It led to the bathroom."
                                  :open "It was already open."
                                  :close "After all that effort?"
                                  :use "You mean enter it?"
-                                 :enter :bathroom
+                                 :enter {:pre :bathroom :post `update-garden}
                                  :break "Why?"
                                  :id "bath-window-open"))
 
