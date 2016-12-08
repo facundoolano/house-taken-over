@@ -7,6 +7,7 @@
 (def street (->
               (room/make "Front of house"
                          "The house, big and old, was on the corner of the block. On every side of the door was a large window."
+                         :initial-description "I arrived on foot, without being noticed. The house, big and old, was placed on a quiet corner of a not-so-quiet street.\n \nThe house was big and old and I had to take it over."
                          :default-go "I didn't want too go too far away from the house.")
 
               (room/add-item (item/make "street" "It was very quiet at the time.") "")
@@ -52,10 +53,10 @@
                      "A plastered brick wall, about twice my height."
                      :climb-up "I needed to hold on to something to climb it."))
 
-; FIXME comment on house size first time
 (def house-side (->
                   (room/make "Side of the house"
                              "The western side of the house, just around the corner, turned into a high wall that stretched north."
+                             :initial-description "Walking by the side of the house I realized it was even bigger than it appeared from the front."
                              :known true
                              :up "Maybe there was a way to climb up that wall.")
 
