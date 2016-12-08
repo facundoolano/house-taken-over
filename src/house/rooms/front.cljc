@@ -7,7 +7,8 @@
 
 (def living (->
               (room/make "Living room"
-                         "There were bedrooms on either side of the central living room and a corridor leading to the back section.")
+                         "There were bedrooms on either side of the central living room and a corridor leading to the back section."
+                         :known true)
               (room/add-item mailbox "Just by the gate door was a bronze mailbox.")))
 
 ; TODO add sofa, bed, wardrobe, camphor chest, table, knitting basket
