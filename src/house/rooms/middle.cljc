@@ -2,16 +2,16 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.puzzles.candles :refer [matches]]))
+            [house.puzzles.candles :refer [matches]]
+            [house.puzzles.oak-door :refer [bolted-door bolt]]))
 
-; TODO add oak door and puzzle
 (def front-hall (->
                  (room/make "Corridor"
                             "The main passage carried on the other side of the oak door, connecting to the front of the house."
                             :initial-description "Standing at the end of the corridor I saw the hand pulling the gate door, across the living. The slam of the iron grating resounded for a second and then there was nothing else to be heard."
                             :known true)
-
-                 (room/add-item (item/make ["door" "oak door"] "It was massive, I think I said that.") "")))
+                 (room/add-item bolted-door "")
+                 (room/add-item bolt "")))
 
 (def side-hall (room/make "Passageway"
                           "A narrow passageway connected the bathroom and kitchen with the main corridor of the house."

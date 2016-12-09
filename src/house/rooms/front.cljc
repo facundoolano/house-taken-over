@@ -2,7 +2,8 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.puzzles.envelope :refer [mailbox]]))
+            [house.puzzles.envelope :refer [mailbox]]
+            [house.puzzles.oak-door :refer [large-key]]))
 
 
 (def living (->
@@ -15,5 +16,7 @@
 (def woman-bedroom (room/make "Woman's bedroom"
                               " "))
 
-
-(def man-bedroom (room/make "Man's bedroom" " "))
+; TODO add rolltop desk and put large-key inside of it
+(def man-bedroom (->
+                  (room/make "Man's bedroom" " ")
+                  (room/add-item large-key)))

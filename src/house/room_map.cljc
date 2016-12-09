@@ -9,7 +9,8 @@
                                       back-bedroom-post]]
 
             [house.rooms.middle :refer [front-hall side-hall kitchen bathroom]]
-            [house.rooms.front :refer [living woman-bedroom man-bedroom]]))
+            [house.rooms.front :refer [living woman-bedroom man-bedroom]]
+            [house.puzzles.oak-door :refer [oak-unlocked]]))
 
 ;; define a room map and then set the connections between rooms
 (def room-map
@@ -74,7 +75,7 @@
     (room/connect :back-hall1 :east :dining)
     (room/connect :back-hall1 :south "The door was locked from the other side.")
 
-    (room/connect :front-hall :north :back-hall1) ; FIXME just for testing
+    (room/connect :front-hall :north `oak-unlocked)
 
     (room/connect :front-hall :west :side-hall)
     (room/connect :side-hall :west :bathroom)
