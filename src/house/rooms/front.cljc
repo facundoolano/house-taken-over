@@ -3,14 +3,15 @@
             [advenjure.items :as item]
             [advenjure.utils :as utils]
             [house.puzzles.envelope :refer [mailbox]]
+            [house.puzzles.gate-door :refer [gate-door]]
             [house.puzzles.oak-door :refer [large-key]]))
-
 
 (def living (->
               (room/make "Living room"
                          "There were bedrooms on either side of the central living room and a corridor leading to the back section."
                          :known true)
-              (room/add-item mailbox "Just by the gate door was a bronze mailbox.")))
+              (room/add-item mailbox "Just by the gate door was a bronze mailbox.")
+              (room/add-item gate-door "")))
 
 ; TODO add sofa, bed, wardrobe, camphor chest, table, knitting basket
 (def woman-bedroom (room/make "Woman's bedroom"

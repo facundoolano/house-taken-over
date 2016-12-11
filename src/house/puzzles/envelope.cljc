@@ -3,7 +3,7 @@
             [advenjure.utils :as utils]))
 
 (def letter (item/make ["letter"] "It was a letter from a lawyer."
-                       :read "TL;DR")) ; FIXME add letter text
+                       :read "…I appreciate that you don't want to stir up the memory of your father, but without the deed you can't claim ownership of the house, or any of the properties for that matter. I insist that you must search through his papers…"))
 
 (defn open-envelope [old gs]
   (let [envelope (utils/find-first gs "envelope")]

@@ -10,7 +10,8 @@
 
             [house.rooms.middle :refer [front-hall side-hall kitchen bathroom]]
             [house.rooms.front :refer [living woman-bedroom man-bedroom]]
-            [house.puzzles.oak-door :refer [oak-unlocked]]))
+            [house.puzzles.oak-door :refer [oak-unlocked-back oak-unlocked-front]]
+            [house.puzzles.gate-door :refer [gate-unlocked]]))
 
 ;; define a room map and then set the connections between rooms
 (def room-map
@@ -73,18 +74,18 @@
     (room/connect :dining :north :tapestry)
     (room/connect :back-hall1 :west :library)
     (room/connect :back-hall1 :east :dining)
-    (room/connect :back-hall1 :south "The door was locked from the other side.")
+    (room/one-way-connect :back-hall1 :south `oak-unlocked-back)
 
-    (room/connect :front-hall :north `oak-unlocked)
+    (room/one-way-connect :front-hall :north `oak-unlocked-front)
 
     (room/connect :front-hall :west :side-hall)
     (room/connect :side-hall :west :bathroom)
     (room/connect :side-hall :south :kitchen)
-    (room/connect :front-hall :south :living) ; FIXME not really, this will be blocked
+    (room/connect :front-hall :south :living)
 
     (room/connect :living :west :man-bedroom)
     (room/connect :living :east :woman-bedroom)
-    (room/one-way-connect :living :south :vestibule))) ; FIXME not really, when he gets here will be two way
+    (room/one-way-connect :living :south `gate-unlocked)))
 
 
 

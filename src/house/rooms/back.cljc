@@ -5,6 +5,8 @@
             [house.puzzles.bath-window :refer [piano-stool]]
             [house.puzzles.catalog :refer [catalog]]
             [house.puzzles.safe :refer [safe-portrait]]
+            [house.puzzles.oak-door :refer [oak-door-back]]
+            [house.puzzles.gate-door :refer [key-set]]
             [house.puzzles.candles :refer [candles candlestick]]))
 
 ; common corridor items
@@ -52,13 +54,6 @@
                   (room/add-item floor "")
                   (room/add-item rug "")))
 
-(def oak-door (item/make ["oak door" "door"]
-                         "It was massive, I think I said that. I had to find another way around."
-                         :break "It was massive, I think I said that. I had to find another way around."
-                         :closed true
-                         :open "The door was locked from the other side."
-                         :locked true))
-
 (def back-hall1 (->
                   (room/make "Corridor"
                              "The massive oak door was blocking my way to the front section of the house. There were rooms to the east and west."
@@ -70,7 +65,7 @@
                   (room/add-item rug "")
                   (room/add-item (make-door "west door" :library) "")
                   (room/add-item (make-door "east door" :dining) "")
-                  (room/add-item oak-door "")))
+                  (room/add-item oak-door-back "")))
 
 (def top-drawer (item/make ["drawer" "top drawer"]
                            "There was nothing special about it."
@@ -162,7 +157,6 @@
               (room/add-item shelves "")
               (room/add-item parks-book "")))
 
-; TODO add front door keys to drawer
 (def hidden-room (->
                   (room/make "Hidden room" "An old and musty study."
                              :initial-description "The candlelight exposed an old study which was evidently excluded from the house cleaning routines; a musty smell and a thick layer of dust made it clear that no one had walked through the door in a long time."
@@ -171,7 +165,7 @@
                   (room/add-item (item/make "desk" "It had one drawer.") "There was a wide desk in the center of the room and behind it a portrait of an old man.")
                   (room/add-item (item/make "door" "The same as in the other rooms.") "A door led east to the corridor.")
                   (room/add-item (item/make ["drawer" "desk drawer"] "Nothing special about it."
-                                            :closed true :items #{}) "")
+                                            :closed true :items #{key-set}) "")
                   (room/add-item safe-portrait "")
                   (room/add-item candlestick "On the desk were a candlestick and book.")
                   (room/add-item (item/make ["book" "book on desk"]

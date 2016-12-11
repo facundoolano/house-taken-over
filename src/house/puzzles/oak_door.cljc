@@ -26,6 +26,11 @@
                                         :say "The large key did the trick. I left it in the lock."
                                         :post `post-key-unlock}))
 
+(def unlocked-door (item/make ["oak door" "door"]
+                              "It was massive, I think I said that."
+                              :closed true))
+
+
 (def moved-bolt (item/make "bolt" "It wasn't blocking the door anymore."
                            :move "No need to move it back."
                            :use "No need to move it back."))
@@ -66,9 +71,12 @@
 (defn key-post
   [old gs]
   (let [door (utils/find-first gs "door")
-        new-door (dissoc door :locked)
-        gs (utils/replace-item gs door new-door)]
-    (post-key-unlock old gs)))
+        back-door (first (item/get-from (get-in gs [:room-map :back-hall1 :items]) "oak door"))
+        new-gs (-> gs
+                (update-in [:room-map :front-hall :items] item/replace-from door unlocked-door)
+                (update-in [:room-map :back-hall1 :items] item/replace-from back-door unlocked-door))]
+    (println back-door)
+    (post-key-unlock old new-gs)))
 
 (def large-key (item/make ["large key" "key"] "Iron, I thought."
                           :take true
@@ -78,9 +86,21 @@
                                      :post `key-post}))
 
 ; for use in room map
-(defn oak-unlocked
+(defn oak-unlocked-front
   [gs]
   (let [door (utils/find-first gs "door")]
     (if (:locked door) "The oak door was locked."
       :back-hall1)))
 
+(defn oak-unlocked-back
+  [gs]
+  (let [door (utils/find-first gs "oak door")]
+    (if (:locked door) "The door was locked from the other side."
+      :front-hall)))
+
+(def oak-door-back (item/make ["oak door" "door"]
+                              "It was massive, I think I said that. I had to find another way around."
+                              :break "It was massive, I think I said that. I had to find another way around."
+                              :closed true
+                              :open "The door was locked from the other side."
+                              :locked true))
