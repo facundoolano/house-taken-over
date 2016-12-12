@@ -3,6 +3,10 @@
             [advenjure.rooms :as room]
             [advenjure.utils :as utils]))
 
+(def unlocked-door (item/make ["oak door" "door"]
+                              "It was massive, I think I said that."
+                              :closed true))
+
 (defn pre-bolt-unlock
   [gs item]
   (if (some #{"bolt"} (:names item))
@@ -12,9 +16,12 @@
 (defn post-key-unlock
   [old gs]
   (let [door (utils/find-first gs "door")
-        large-key (utils/find-first gs "large key")]
+        large-key (utils/find-first gs "large key")
+        back-door (first (item/get-from (get-in gs [:room-map :back-hall1 :items]) "oak door"))]
     (if-not (:locked door)
-      (utils/remove-item gs large-key))))
+      (-> gs
+        (update-in [:room-map :back-hall1 :items] item/replace-from back-door unlocked-door)
+        (utils/remove-item large-key)))))
 
 (def locked-door (item/make ["oak door" "door"]
                             "The massive oak door was locked, I had to find the key."
@@ -25,11 +32,6 @@
                             :open-with {:pre true
                                         :say "The large key did the trick. I left it in the lock."
                                         :post `post-key-unlock}))
-
-(def unlocked-door (item/make ["oak door" "door"]
-                              "It was massive, I think I said that."
-                              :closed true))
-
 
 (def moved-bolt (item/make "bolt" "It wasn't blocking the door anymore."
                            :move "No need to move it back."
@@ -69,13 +71,10 @@
     "That didn't work."))
 
 (defn key-post
+  "set unlocked and call the unlock postcondition"
   [old gs]
   (let [door (utils/find-first gs "door")
-        back-door (first (item/get-from (get-in gs [:room-map :back-hall1 :items]) "oak door"))
-        new-gs (-> gs
-                (update-in [:room-map :front-hall :items] item/replace-from door unlocked-door)
-                (update-in [:room-map :back-hall1 :items] item/replace-from back-door unlocked-door))]
-    (println back-door)
+        new-gs (utils/replace-item gs door unlocked-door)]
     (post-key-unlock old new-gs)))
 
 (def large-key (item/make ["large key" "key"] "Iron, I thought."

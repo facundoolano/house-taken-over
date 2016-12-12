@@ -40,7 +40,7 @@
                     "\n \nDespite appearances, puzzling is not a solitary game: every move the puzzler makes, the puzzlemaker has made before; every piece the puzzler picks up, and picks up again, and studies and strokes, every combination he tries, and tries a second time, every blunder and every insight, each hope and each discouragement have all been designed, calculated, and decided by the other."
                     "\n \nGeorges Perec, \"Life: A User's Manual\"."))
 
-(def game-state (-> (game/make room-map :bathroom) ;FIXME :street
+(def game-state (-> (game/make room-map :street)
                     (game/use-plugin map-on-every-room)
                     (game/use-plugin burn-candle-plugin)
                     (game/use-plugin dark-room)))

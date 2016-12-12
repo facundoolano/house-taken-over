@@ -18,7 +18,6 @@
 (defn gate-unlocked
   [gs]
   (let [door (utils/find-first gs "gate door")]
-    (println door)
     (if (:locked door) "The gate door was locked."
       :vestibule)))
 
