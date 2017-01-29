@@ -86,11 +86,3 @@
     (room/connect :living :west :man-bedroom)
     (room/connect :living :east :woman-bedroom)
     (room/one-way-connect :living :south `gate-unlocked)))
-
-
-
-
-
-
-
-

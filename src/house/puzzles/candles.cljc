@@ -80,7 +80,7 @@
   (update-in gs [:inventory] conj lit-candle))
 
 
-(def matches (item/make ["box of matches" "match box" "matchbox" "matches" "match"]
+(def matches (item/make ["box of matches" "match box" "matchbox" "matches" "match" "box"]
                         "It was full of matches."
                         :look-in "It was full of matches."
                         :take true
@@ -90,7 +90,7 @@
                                    :post `post-light
                                    :say "I lit a candle with the match."}))
 
-(def candles (item/make ["box of candles" "candles" "candle"] "Fancy."
+(def candles (item/make ["box of candles" "candles" "candle" "box"] "Fancy."
                         :take true
                         :use "That usually requires fire."
                         :light "That usually requires fire."

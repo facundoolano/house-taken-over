@@ -94,7 +94,7 @@
               (room/add-item bottom-drawer "")
               (room/add-item (item/make ["dining table" "table"] "I lived in places smaller than that table.") "")
               (room/add-item (item/make ["table" "small table"] "I guessed it was used to hold dishes during dinner.") "")
-              (room/add-item (item/make ["chair" "chairs"] "Dark wood mathcing the table. Arms and legs had elaborate carvings." :take "Those chairs were way too heavy to carry around.") "")))
+              (room/add-item (item/make ["chair" "chairs"] "Dark wood matching the table. Arms and legs had elaborate carvings." :take "Those chairs were way too heavy to carry around.") "")))
 
 ; TODO react to using matches on fireplace?
 (def tapestry (-> (room/make "Tapestries room"
@@ -185,7 +185,7 @@
    (let [current (:current-room gs)
          otherkw (get {:bedroom2 :bedroom3 :bedroom3 :bedroom2} current)]
       (-> gs
-         (assoc-in [:room-map otherkw :initial-description] "The room was a perfect mirror of the one across the hall: same furniture, same immaculacy and lifelessness")
+         (assoc-in [:room-map otherkw :initial-description] "The room was a perfect mirror of the one across the hall: same furniture, same immaculacy and lifelessness.")
          ; drop conditions
          (assoc-in [:room-map :back-hall3 :west] :bedroom2)
          (assoc-in [:room-map :back-hall3 :east] :bedroom3))))
