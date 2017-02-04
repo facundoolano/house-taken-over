@@ -11,6 +11,7 @@
     (some #{"oak door"} (:names item)) "That would most likely have broken the crowbar."
     (= (:id item) "bath-window") "There was no need to break the window, just find a way to reach it."
     (= (:id item) "bath-window-reachable") "The crowbar didn't have the proper grip for the job, it was too long."
+    (= (:id item) "no-knob-door") "It wouldn't fit."
     (some #{"window"} (:names item)) "I didn't want to draw too much attention."
     :else "I didn't want to break into that."))
 

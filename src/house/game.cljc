@@ -11,6 +11,7 @@
 
 (def break (make-item-handler "break" :break))
 (def drop_ (make-say-verb "I had plenty of room in my bag, no need to be dropping stuff."))
+(def play (make-item-handler "play" :play))
 
 (def light (make-item-handler "light" :light))
 (def light-with (make-compound-item-handler "light" :light-with))
@@ -20,6 +21,7 @@
 (def verb-map (-> {}
                   (add-verb ["^break (?<item>.*)" "^break in (?<item>.*)"  "^break into (?<item>.*)" "^break$"] break)
                   (add-verb ["^drop (?<item>.*)" "^drop$"] drop_)
+                  (add-verb ["^play (?<item>.*)" "^play$"] play)
                   (add-verb ["^light (?<item>.*)" "^light$"
                              "^turn (?<item>.*)" "^turn on (?<item>.*)"
                              "^turn (?<item>.*) on" "^turn on$" "^turn$"] light)

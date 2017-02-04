@@ -40,7 +40,8 @@
 
 (def fake-door (item/make ["door" "west door" "w door"]
                           "It was the same as the other doors in the corridor, except it didn't have a doorknob."
-                          :open "I couldn't open the west door, it didn't have a doorknob."))
+                          :open "I couldn't open the west door, it didn't have a doorknob."
+                          :id "no-knob-door"))
 
 (def back-hall2 (->
                   (room/make "Corridor"
@@ -96,11 +97,17 @@
               (room/add-item (item/make ["table" "small table"] "I guessed it was used to hold dishes during dinner.") "")
               (room/add-item (item/make ["chair" "chairs"] "Dark wood matching the table. Arms and legs had elaborate carvings." :take "Those chairs were way too heavy to carry around.") "")))
 
+(def piano (item/make "piano" "The lid was down and had a macramé tablecloth on top"
+                      :take "Funny."
+                      :open "Better left closed."
+                      :play "I never learnt to play."
+                      :use "I never learnt to play."))
+
 ; TODO react to using matches on fireplace?
 (def tapestry (-> (room/make "Tapestries room"
                              "A living room with a huge tapestry covering the north wall, and two smaller ones on the opposite side, left and right of a door. There was a set of sofas around a fireplace, a drinks cabinet on a corner, and a piano.")
                   (room/add-item (item/make ["tapestry" "tapestries"] "All three depicted battles, historical events, I supposed." :take "I could carry infinite things in my bag, but not infinitely big things.") "")
-                  (room/add-item (item/make "piano" "The lid was down and had a macramé tablecloth on top" :take "Funny." :open "Better left closed.") "")
+                  (room/add-item piano "")
                   (room/add-item piano-stool "By the piano was a little stool.")
                   (room/add-item (item/make ["tablecloth" "macramé" "macramé tablecloth" "cloth"] "Some diamond pattern." :take "It was useless.") "")
                   (room/add-item (item/make "fireplace" "The fireplace was empty, it probably hadn't been lit in years.") "")
