@@ -68,7 +68,7 @@
                          :up "Maybe there was a way to climb up that wall.")
               (room/add-item wall "")))
 
-(def fig (item/make ["creeping fig" "fig"]
+(def fig (item/make ["creeping fig" "fig" "branch" "branches"]
                     "The fig was uneven, as if it hadn't been taken care of in a while. Strong branches were reachable behind the outer layer of leaves."
                     :climb-up :garden))
 

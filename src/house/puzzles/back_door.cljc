@@ -14,6 +14,12 @@
     (some #{"window"} (:names item)) "I didn't want to draw too much attention."
     :else "I didn't want to break into that."))
 
+(defn can-go-out
+  [gs]
+  (if (get-in gs [:room-map :back-hall1 :visited] gs)
+    :house-back
+    "I had just got in, there was no point in going back."))
+
 (defn crow-post
   "Open the door and connect the rooms."
   [old gs]
@@ -22,7 +28,9 @@
                             "You could hardly tell that I, um, \"unlocked\" it."
                             :open true
                             :enter :back-hall3)
-        new-map (room/connect (:room-map gs) :house-back :south :back-hall3)]
+        new-map (-> (:room-map gs)
+                    (room/one-way-connect :house-back :south :back-hall3)
+                    (room/one-way-connect :back-hall3 :north `can-go-out))]
     (if-not (:locked door)
       (-> gs
         (assoc :room-map new-map)
