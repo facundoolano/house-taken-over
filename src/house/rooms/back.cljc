@@ -21,8 +21,8 @@
 
 (def rug (item/make "rug" "An ornate long rug."))
 
-(defn make-door [extra-name goes-to]
-   (item/make ["door" extra-name]
+(defn make-door [extra-names goes-to]
+   (item/make (apply conj ["door"] extra-names)
       "A wooden door."
       :closed true
       :enter goes-to))
@@ -31,14 +31,14 @@
                   (room/make "Corridor"
                              "The end of a corridor with rooms to the east and west, and the door to the back garden"
                              :initial-description "My steps resounded throughout a long corridor, with a series of rooms on each side. On the other end was an oak door, ajar.")
-                  (room/add-item (make-door "west door" :bedroom2) "")
-                  (room/add-item (make-door "east door" :bedroom3) "")
+                  (room/add-item (make-door ["west door" "w door"] :bedroom2) "")
+                  (room/add-item (make-door ["east door" "e door"] :bedroom3) "")
                   (room/add-item corridor "")
                   (room/add-item paintings "")
                   (room/add-item floor "")
                   (room/add-item rug "")))
 
-(def fake-door (item/make ["door" "west door"]
+(def fake-door (item/make ["door" "west door" "w door"]
                           "It was the same as the other doors in the corridor, except it didn't have a doorknob."
                           :open "I couldn't open the west door, it didn't have a doorknob."))
 
@@ -48,7 +48,7 @@
                              :initial-description "The rug that traversed the room wasn't enough to silence the creak of the floor, as if the house denounced my irruption."
                              :known true)
                   (room/add-item fake-door "")
-                  (room/add-item (make-door "east door" :tapestry) "")
+                  (room/add-item (make-door ["east door" "e door"] :tapestry) "")
                   (room/add-item corridor "")
                   (room/add-item paintings "")
                   (room/add-item floor "")
@@ -63,8 +63,8 @@
                   (room/add-item paintings "")
                   (room/add-item floor "")
                   (room/add-item rug "")
-                  (room/add-item (make-door "west door" :library) "")
-                  (room/add-item (make-door "east door" :dining) "")
+                  (room/add-item (make-door ["west door" "w door"] :library) "")
+                  (room/add-item (make-door ["east door" "e door"] :dining) "")
                   (room/add-item oak-door-back "")))
 
 (def top-drawer (item/make ["drawer" "top drawer"]
