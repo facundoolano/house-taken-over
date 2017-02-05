@@ -5,7 +5,7 @@
             [house.puzzles.envelope :refer [mail-slot]]))
 
 (def street (->
-              (room/make "Front of house"
+              (room/make "Front of the house"
                          "The house, big and old, was on the corner of the block. On every side of the door was a large window."
                          :initial-description "I arrived on foot, without being noticed. The house, big and old, was placed on a quiet corner of a not-so-quiet street.\n \nThe house was big and old and I had to take it over."
                          :default-go "I didn't want too go too far away from the house.")

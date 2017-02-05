@@ -64,7 +64,7 @@
 (defn burn-candle-hook
   [game-state]
   (let [candle (utils/find-first game-state "lit candle")
-        updated (update-in candle [:turns-left] dec)]
+        updated (if candle (update-in candle [:turns-left] dec))]
     (if (= 0 (:turns-left updated))
       (do
         (utils/say " ")

@@ -3,6 +3,8 @@
 Text adventure inspired by the short story "House Taken Over", written by Julio Cortázar.
 The game uses the [advenjure](https://github.com/facundoolano/advenjure) engine.
 
+A WIP version can be played online [here](https://facundoolano.github.io/house-taken).
+
 ## Usage
 
 Clone the respository and [Install leiningen](http://leiningen.org/#install) if necessary.
