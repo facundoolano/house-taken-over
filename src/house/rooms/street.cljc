@@ -12,15 +12,14 @@
                          :default-go "I didn't want too go too far away from the house.")
 
               (room/add-item (item/make "street" "It was very quiet at the time.") "")
-
               (room/add-item (item/make ["window" "left window"]
                                         "Through the left window I saw a bedroom. There was a middle-aged man inside, reading a book."
                                         :look-in "Through the left window I saw a bedroom. There was a middle-aged man inside, reading a book.") "")
-
               (room/add-item (item/make ["window" "right window"]
                                         "I saw a bedroom through the right window. There was a woman on a sofa, knitting."
                                         :look-in "I saw a bedroom through the right window. There was a woman on a sofa, knitting.") "")
-
+              (room/add-item (item/make "man" "He was reading." :talk "He couldn't hear me.") "")
+              (room/add-item (item/make "woman" "She was knitting." :talk "She couldn't hear me.") "")
               (room/add-item (item/make "house"
                                         "One of those aristocratic buildings that could easily accommodate four families but was barely inhabited instead."
                                         :break "Why? The street door was open."
