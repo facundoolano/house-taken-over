@@ -10,6 +10,7 @@
             [advenjure.verb-map :refer [add-verb]]))
 
 (def break (make-item-handler "break" :break))
+(def hold (make-item-handler "hold" :hold))
 (def drop_ (make-say-verb "I had plenty of room in my bag, no need to be dropping stuff."))
 (def play (make-item-handler "play" :play))
 
@@ -18,9 +19,24 @@
 
 (def put-in (make-compound-item-handler "put" :put))
 
+(defn jump [game-state]
+  (if (= :west-passage (:current-room game-state))
+    (utils/say "No use, I still couldn't climb the window.")
+    (utils/say "Hop!")))
+
+(def reach (make-item-handler "reach" :reach
+                              (defn reach [game-state item]
+                                (utils/say (get-in item [:reach :say] "And do what?")))
+                              :kw-required false))
+
 (def verb-map (-> {}
                   (add-verb ["^break (?<item>.*)" "^break in (?<item>.*)"  "^break into (?<item>.*)" "^break$"] break)
+                  (add-verb ["^hold (?<item>.*)" "^hold$"
+                             "^hold on (?<item>.*)" "^hold on$"
+                             "^hold on to (?<item>.*)" "^hold on to$"] hold)
+                  (add-verb ["^jump$"] jump)
                   (add-verb ["^drop (?<item>.*)" "^drop$"] drop_)
+                  (add-verb ["^reach (?<item>.*)" "^reach$"] reach)
                   (add-verb ["^play (?<item>.*)" "^play$"] play)
                   (add-verb ["^light (?<item>.*)" "^light$"
                              "^turn (?<item>.*)" "^turn on (?<item>.*)"
@@ -48,6 +64,7 @@
                     (game/use-plugin dark-room)))
 
 (defn finished?
+  "Finish when coming out the front door: in vestibule and carrying keys."
   [gs]
   (let [key-set (utils/find-first gs "key set")]
     (and key-set (= (:current-room gs) :vestibule))))

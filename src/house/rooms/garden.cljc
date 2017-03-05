@@ -65,7 +65,8 @@
 ; FIXME add wall, maybe accept use with stool
 (def west-passage (->
                     (room/make "West passage"
-                               "The western passage ended up in a wall with a high window, probably of a bathroom.")
+                               "The western passage ended up in a wall with a high window, probably of a bathroom."
+                               :up "There was that window, but I couldn't reach it from the ground level.")
                     (room/add-item bath-window "")))
 
 (def room-window (item/make "window"

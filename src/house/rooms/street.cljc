@@ -2,6 +2,7 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
+            [advenjure.change-rooms :refer [change-rooms]]
             [house.puzzles.envelope :refer [mail-slot]]))
 
 (def street (->
@@ -68,9 +69,13 @@
                          :up "Maybe there was a way to climb up that wall.")
               (room/add-item wall "")))
 
+(defn post-hold [_ gs] (change-rooms gs :garden))
+
 (def fig (item/make ["creeping fig" "fig" "branch" "branches"]
                     "The fig was uneven, as if it hadn't been taken care of in a while. Strong branches were reachable behind the outer layer of leaves."
-                    :climb-up :garden))
+                    :climb-up :garden
+                    :take "It was strongly attached to the wall."
+                    :hold {:post `post-hold}))
 
 (def alley (->
              (room/make "Alley"

@@ -8,6 +8,8 @@
                             "It was too high to look inside from where I was standing."
                             :look-in "It was too high to look inside from where I was standing."
                             :open "I could reach the border of the window but not open it from the ground level."
+                            :reach "I could reach the border of the window but not open it from the ground level."
+                            :climb "I could reach the border of the window but not open it from the ground level."
                             :open-with "I could reach the border of the window but not open it from the ground level."
                             :use "I could reach the border of the window but not open it from the ground level."
                             :enter "I could reach the border of the window but not open it from the ground level."
@@ -27,10 +29,12 @@
 (def bath-window-open (item/make ["window" "bathroom window"]
                                  "It led to a bathroom and was now open."
                                  :look-in "It led to the bathroom."
+                                 :reach "It led to the bathroom."
                                  :open "It was already open."
                                  :close "After all that effort?"
                                  :use "You mean enter it?"
                                  :enter {:pre :bathroom :post `update-garden}
+                                 :climb {:pre :bathroom :post `update-garden}
                                  :break "Why?"
                                  :id "bath-window-open"))
 
@@ -55,6 +59,8 @@
 (def bath-window-reachable (item/make ["window" "bathroom window"]
                                       "Standing on the stool I could look inside the window. It was a bathroom, all right. I could have probably made it through the window, but it was closed from inside."
                                       :look-in "Standing on the stool I could look inside the window. It was a bathroom, all right. I could have probably made it through the window, but it was closed from inside."
+                                      :reach "Standing on the stool I could look inside the window. It was a bathroom, all right. I could have probably made it through the window, but it was closed from inside."
+                                      :climb "Standing on the stool I could look inside the window. It was a bathroom, all right. I could have probably made it through the window, but it was closed from inside."
                                       :open "I couldn't with my bare hands."
                                       :use "I couldn't open it with my bare hands."
                                       :enter "It was closed from the inside."

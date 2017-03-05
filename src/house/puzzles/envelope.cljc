@@ -35,9 +35,13 @@
   (update-in gs [:room-map :vestibule :items] conj slot-envelope))
 
 (def mail-slot (item/make ["mail slot" "slot"] "Bronze."
+                          :id "mail-slot"
                           :open "I couldn't open the slot, but maybe reach inside of it."
                           :close false
                           :take "I couldn't take the slot, but maybe reach inside of it."
+                          :reach {:pre true
+                                  :say "I could reach a piece of paper, probably an envelope, near the edge of the slot."
+                                  :post `add-envelope}
                           :look-in {:pre true
                                     :say "I could reach a piece of paper, probably an envelope, near the edge of the slot."
                                     :post `add-envelope}))
