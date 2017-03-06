@@ -32,7 +32,8 @@
                               " "))
 
 (def papers (item/make ["pile of papers" "papers"] "A pile of written papers."
-                       :read "We like the house because, apart from its being old and spacious (in a day when old houses go down for a profitable auction of their construction materials), it keeps the memories of great‐grandparents, our paternal grandfather, our parents and the whole of childhood. Irene and I got used to staying in the house by ourselves, which is crazy, eight people could live in this place and not get in each other's way. We rise at seven in the morning and get the cleaning done, and about eleven I leave Irene to finish off whatever rooms and go to the kitchen. We lunch at noon precisely; then there is nothing left to do but a few dirty plates. It is pleasant to take lunch and commune with the great hollow, silent house, and it is enough for us just to keep it clean..."))
+                       :read "We like the house because, apart from its being old and spacious (in a day when old houses go down for a profitable auction of their construction materials), it keeps the memories of great‐grandparents, our paternal grandfather, our parents and the whole of childhood. Irene and I got used to staying in the house by ourselves, which is crazy, eight people could live in this place and not get in each other's way. We rise at seven in the morning and get the cleaning done, and about eleven I leave Irene to finish off whatever rooms and go to the kitchen. We lunch at noon precisely; then there is nothing left to do but a few dirty plates. It is pleasant to take lunch and commune with the great hollow, silent house, and it is enough for us just to keep it clean…"
+                       :take "No need to carry that around."))
 
 (defn post-desk-open
   [_ gs]
@@ -47,6 +48,46 @@
                              :open {:pre true :say "I rolled up the cover." :post `post-desk-open}
                              :items #{papers large-key}))
 
+(def book (item/make "book" "L'école des indifférents by Jean Giraudoux." :read "I don't do french… books." :take "No, thanks."))
+
+(def album (item/make ["stamps album" "album" "stamps"] "I guess with enough free time you can turn anything into a hobby."
+                :take "Not a chance."
+                :open "Not a chance."
+                :read "Nothing to read in it."))
+
+(def window (item/make ["window" "street"] "It was dark outside."
+                       :break "I couldn’t, the window had bars on it."
+                       :open "There was no benefit in doing that."))
+
+(def drawers (item/make ["desk drawers" "drawers"] "The rolltop desk was full of them."
+                        :open "I had no time to go over the desk drawers, there were too many of them."))
+
+(defn post-open
+  [old gs]
+  (let [box (utils/find-first gs "box")
+        new-box (update-in box [:open] dissoc :say)]
+    (utils/replace-item gs box new-box)))
+
+(def cash (item/make ["bunch of cash" "cash" "money" "wads" "wads of cash"] "Around 15 thousand pesos, I estimated." :take true))
+(def box (item/make "box" "Shoes, I guessed."
+                    :take "I wasn’t interested in the box, but maybe in its contents."
+                    :open {:pre true
+                           :say "The box was full of wads of cash that I quickly estimated in around 15 thousand pesos."
+                           :post `post-open}
+                    :items #{cash}))
+(def wardrobe (item/make "wardrobe" "Big, old and expensive, like everything in the house."
+                         :closed true
+                         :open {:pre true
+                                :say "The wardrobe was full of man clothes. There was also a little box on its base."}
+                         :items #{box}))
+
 (def man-bedroom (->
-                  (room/make "Man's bedroom" " ")
-                  (room/add-item rolltop-desk)))
+                  (room/make "Man's bedroom" "A man’s bedroom with a bed, a night table, an wardrobe and a rolltop desk."
+                             :initial-description "The man’s bedroom was less furnished than the rest of the rooms: there were an old bed with a night table, a big wardrobe and a rolltop desk on the opposite side of the room.")
+                  (room/add-item rolltop-desk "")
+                  (room/add-item window "On the southern wall was the window I saw from the street.")
+                  (room/add-item book "There was a stamps album on the desk and a little book on the night table.")
+                  (room/add-item (item/make ["night table" "table"]) "")
+                  (room/add-item album "")
+                  (room/add-item drawers "")
+                  (room/add-item wardrobe "")))
