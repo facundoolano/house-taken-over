@@ -25,7 +25,7 @@
     (utils/say "Hop!")))
 
 (def reach (make-item-handler "reach" :reach
-                              (defn reach [game-state item]
+                              (fn [game-state item]
                                 (utils/say (get-in item [:reach :say] "And do what?")))
                               :kw-required false))
 
