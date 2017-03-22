@@ -27,9 +27,26 @@
               (room/add-item clock "")
               (room/add-item gate-door "")))
 
-; TODO add sofa, bed, wardrobe, camphor chest, table, knitting basket
-(def woman-bedroom (room/make "Woman's bedroom"
-                              " "))
+(def window (item/make ["window" "street"] "It was dark outside."
+                       :break "I couldn’t, the window had bars on it."
+                       :open "There was no benefit in doing that."))
+
+;; TODO add camphor chest, table
+(def armoire (item/make "armoire" "It must have contained several generations of women's clothes."
+                        :open "I'm not the search women's clothes type of guy."))
+(def vest (item/make "vest" "It was grey." :take "I wasn’t into knitting."))
+(def basket (item/make ["basket" "knitting basket"] "It contained a halfway done vest."
+                       :take "I wasn’t into knitting."))
+(def needles (item/make ["needle" "needles" "knitting needles"] "The needles were scattered across the floor"
+                        :take "I had enough pointy tools already."))
+(def woman-bedroom (-> (room/make "Woman's bedroom"
+                                  "A woman’s bedroom with a big sofa and scattered knitting tools."
+                                  :initial-description "The woman’s bedroom was the first place in the house that gave me the clear impression of being inhabited. There was a big sofa near the window, where the woman had been working; the knitting tools demonstrated the interrupted activity: needles were scattered in opposite directions away from the basket, which contained a halfway done vest.")
+                       (room/add-item armoire "There was also a bed with its night table and an old armoire.")
+                       (room/add-item window "")
+                       (room/add-item vest "")
+                       (room/add-item basket "")
+                       (room/add-item needles "")))
 
 (def papers (item/make ["pile of papers" "papers"] "A pile of written papers."
                        :read "We like the house because, apart from its being old and spacious (in a day when old houses go down for a profitable auction of their construction materials), it keeps the memories of great‐grandparents, our paternal grandfather, our parents and the whole of childhood. Irene and I got used to staying in the house by ourselves, which is crazy, eight people could live in this place and not get in each other's way. We rise at seven in the morning and get the cleaning done, and about eleven I leave Irene to finish off whatever rooms and go to the kitchen. We lunch at noon precisely; then there is nothing left to do but a few dirty plates. It is pleasant to take lunch and commune with the great hollow, silent house, and it is enough for us just to keep it clean…"
@@ -54,10 +71,6 @@
                 :take "Not a chance."
                 :open "Not a chance."
                 :read "Nothing to read in it."))
-
-(def window (item/make ["window" "street"] "It was dark outside."
-                       :break "I couldn’t, the window had bars on it."
-                       :open "There was no benefit in doing that."))
 
 (def drawers (item/make ["desk drawers" "drawers"] "The rolltop desk was full of them."
                         :open "I had no time to go over the desk drawers, there were too many of them."))

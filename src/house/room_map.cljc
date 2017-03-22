@@ -62,8 +62,11 @@
     (room/one-way-connect :east-passage :north :house-back)
     (room/one-way-connect :house-back :south "The back door was locked.")
 
-    (room/one-way-connect :back-hall3 :west {:pre :bedroom2 :post `back-bedroom-post})
-    (room/one-way-connect :back-hall3 :east {:pre :bedroom3 :post `back-bedroom-post})
+    ;; FIXME implement :P
+    ;; (room/one-way-connect :back-hall3 :west {:pre :bedroom2 :post `back-bedroom-post})
+    ;; (room/one-way-connect :back-hall3 :east {:pre :bedroom3 :post `back-bedroom-post})
+    (room/one-way-connect :back-hall3 :west "The sign on the door read 'NotImplemented'.")
+    (room/one-way-connect :back-hall3 :east "The sign on the door read 'NotImplemented'.")
     (room/one-way-connect :bedroom2 :east :back-hall3)
     (room/one-way-connect :bedroom3 :west :back-hall3)
     (room/connect :back-hall3 :south :back-hall2)

@@ -173,11 +173,11 @@
                   (room/add-item (item/make ["drawer" "desk drawer"] "Nothing special about it."
                                             :closed true :items #{key-set}) "")
                   (room/add-item safe-portrait "")
-                  (room/add-item candlestick "On the desk were a candlestick and book.")
+                  (room/add-item candlestick "On the desk were a candlestick and a book.")
                   (room/add-item (item/make ["book" "book on desk"]
                                             "The book was titled “The Conquest of the Desert”."
                                             :read "It was a history book about some 19th century military campaign: “The Conquest of the Desert”."
-                                            :take "I had no plans to read it.") "On the desk were a candlestick and book.")))
+                                            :take "I had no plans to read it.") "")))
 
 ; TODO add mentioned items
 ; bedroom 2 and 3 are mirrored

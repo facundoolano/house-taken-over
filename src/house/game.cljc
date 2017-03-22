@@ -73,5 +73,5 @@
   (game/run game-state
             finished?
             :start-message init-text
-            :end-message "Having taken over the house, I walked out the way I came in."
+            :end-message "Having taken over the house, I walked out the way I came in. \n\n The End."
             :verb-map verb-map))
