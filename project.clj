@@ -18,7 +18,7 @@
                         :optimize-constants true
                         :static-fns true}}
 
-      :dev {:source-paths ["src" "checkouts/advenjure/src"]
+      :dev {:source-paths ["src"]
             :figwheel {:load-warninged-code true
                        :before-jsload "advenjure.ui.input/figwheel-cleanup"}
 

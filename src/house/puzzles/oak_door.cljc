@@ -46,7 +46,7 @@
       (utils/replace-item door locked-door))))
 
 (def bolted-door (item/make ["oak door" "door"]
-                            "It was massive, I think I said that."
+                            "It was locked by a big bolt."
                             :locked true
                             :unlock {:pre `pre-bolt-unlock
                                      :say "I removed the bolt but the door seemed to be locked still, I had to find the key."
