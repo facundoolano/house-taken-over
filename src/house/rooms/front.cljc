@@ -85,7 +85,7 @@
 (def cash (item/make ["bunch of cash" "cash" "money" "wads" "wads of cash"] "Around 15 thousand pesos, I estimated."
                      :take {:pre true
                             :points 150}))
-(def box (item/make "box" "Shoes, I guessed."
+(def box (item/make ["box" "wardrobe box" "shoe box"] "Shoes, I guessed."
                     :take "I wasn’t interested in the box, but maybe in its contents."
                     :open {:pre true
                            :say "The box was full of wads of cash that I quickly estimated in around 15 thousand pesos."
