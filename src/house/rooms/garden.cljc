@@ -8,7 +8,8 @@
 (def garden (->
               (room/make "Garden"
                          "The garden ended on a long wall, partially covered by a creeping fig."
-                         :initial-description "I made sure that no one was looking, and climbed up the fig.\n \nI got down on the other side of the wall, in a garden.")
+                         :initial-description "I made sure that no one was looking, and climbed up the fig.\n \nI got down on the other side of the wall, in a garden."
+                         :points 100)
               (room/add-item (item/make "wall" "A plastered brick wall, about twice my height." :climb-up "The fig wasn't strong enough to climb up on this side of the wall.") "")
               (room/add-item (item/make ["creeping fig" "fig"] "It was a bit more under control than on the other side." :climb-up "The fig wasn't strong enough to climb up on this side of the wall.") "")
               (room/add-item (item/make ["path" "stone path"] "It led back to the house.") "A stone path led south to the back entrance of the house.")

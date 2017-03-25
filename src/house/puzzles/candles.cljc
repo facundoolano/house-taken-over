@@ -56,9 +56,11 @@
                            :turns-left 5
                            :use-with {:pre `pre-candlestick
                                       :say "I put the candle on the candlestick."
+                                      :points 20
                                       :post `post-candlestick}
                            :put {:pre `pre-candlestick
                                  :say "I put the candle on the candlestick."
+                                 :points 20
                                  :post `post-candlestick}))
 
 (defn burn-candle-hook

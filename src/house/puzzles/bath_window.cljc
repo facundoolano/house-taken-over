@@ -92,6 +92,7 @@
                             :use "I didn't want to sit."
                             :use-with {:pre `is-bath-window
                                        :say "I put the stool against the wall, just below the window."
+                                       :points 150
                                        :post `put-stool}
                             :take true))
 

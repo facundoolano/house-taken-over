@@ -13,14 +13,17 @@
 (def gate-door (item/make ["door" "gate door"]
                           "A wrought‐iron gated door."
                           :locked true
-                          :unlock {:say "After some trial and error, one of the keys opened the door."}
-                          :open-with {:say "After some trial and error, one of the keys opened the door."}))
+                          :unlock {:say "After some trial and error, one of the keys opened the door."
+                                   :points 500}
+                          :open-with {:say "After some trial and error, one of the keys opened the door."
+                                      :points 500}))
 
 (def key-set (item/make ["key set" "set of keys" "keys"]
                         "A ring with about twenty keys of differt sizes."
                         :take true
                         :unlocks gate-door
                         :use-with {:say "After some trial and error, one of the keys opened the door."
+                                   :points 500
                                    :post `key-post}))
 
 (defn gate-unlocked

@@ -49,7 +49,8 @@
                        (room/add-item needles "")))
 
 (def papers (item/make ["pile of papers" "papers"] "A pile of written papers."
-                       :read "We like the house because, apart from its being old and spacious (in a day when old houses go down for a profitable auction of their construction materials), it keeps the memories of great‐grandparents, our paternal grandfather, our parents and the whole of childhood. Irene and I got used to staying in the house by ourselves, which is crazy, eight people could live in this place and not get in each other's way. We rise at seven in the morning and get the cleaning done, and about eleven I leave Irene to finish off whatever rooms and go to the kitchen. We lunch at noon precisely; then there is nothing left to do but a few dirty plates. It is pleasant to take lunch and commune with the great hollow, silent house, and it is enough for us just to keep it clean…"
+                       :read {:say "We like the house because, apart from its being old and spacious (in a day when old houses go down for a profitable auction of their construction materials), it keeps the memories of great‐grandparents, our paternal grandfather, our parents and the whole of childhood. Irene and I got used to staying in the house by ourselves, which is crazy, eight people could live in this place and not get in each other's way. We rise at seven in the morning and get the cleaning done, and about eleven I leave Irene to finish off whatever rooms and go to the kitchen. We lunch at noon precisely; then there is nothing left to do but a few dirty plates. It is pleasant to take lunch and commune with the great hollow, silent house, and it is enough for us just to keep it clean…"
+                              :points 20}
                        :take "No need to carry that around."))
 
 (defn post-desk-open
@@ -81,7 +82,9 @@
         new-box (update-in box [:open] dissoc :say)]
     (utils/replace-item gs box new-box)))
 
-(def cash (item/make ["bunch of cash" "cash" "money" "wads" "wads of cash"] "Around 15 thousand pesos, I estimated." :take true))
+(def cash (item/make ["bunch of cash" "cash" "money" "wads" "wads of cash"] "Around 15 thousand pesos, I estimated."
+                     :take {:pre true
+                            :points 150}))
 (def box (item/make "box" "Shoes, I guessed."
                     :take "I wasn’t interested in the box, but maybe in its contents."
                     :open {:pre true

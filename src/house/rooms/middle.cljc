@@ -19,7 +19,8 @@
 
 (def bathroom (->
                 (room/make "Bathroom" "A bathroom with a lavatory, a toilet, a bathtub and an armoire."
-                           :initial-description "I landed with my hands in a large bathtub.\n \nThe bathroom was much more spacious than actually needed; other than the lavatory, the toilet and the bathtub, the only piece of furniture was a half-empty armoire.")
+                           :initial-description "I landed with my hands in a large bathtub.\n \nThe bathroom was much more spacious than actually needed; other than the lavatory, the toilet and the bathtub, the only piece of furniture was a half-empty armoire."
+                           :points 150)
                 (room/add-item (item/make ["bathtub" "bath" "thub"] "Pretty big." :use "I was good, thanks.") "")
                 (room/add-item (item/make "armoire" "Soap and some towels, nothing of interest." :open "Soap and some towels, nothing of interest.") "")
                 (room/add-item (item/make ["lavatory" "sink"] "It had been recently used." :use "I was good, thanks." :open "I was good, thanks.") "")

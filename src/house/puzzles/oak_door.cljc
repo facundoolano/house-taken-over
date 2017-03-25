@@ -28,9 +28,11 @@
                             :locked true
                             :unlock {:pre true
                                      :say "The large key did the trick. I left it in the lock."
+                                     :points 50
                                      :post `post-key-unlock}
                             :open-with {:pre true
                                         :say "The large key did the trick. I left it in the lock."
+                                        :points 50
                                         :post `post-key-unlock}))
 
 (def moved-bolt (item/make "bolt" "It wasn't blocking the door anymore."
@@ -50,18 +52,22 @@
                             :locked true
                             :unlock {:pre `pre-bolt-unlock
                                      :say "I removed the bolt but the door seemed to be locked still, I had to find the key."
+                                     :points 20
                                      :post `post-move-bolt}
                             :open-with {:pre `pre-bolt-unlock
                                         :say "I removed the bolt but the door seemed to be locked still, I had to find the key."
+                                        :points 20
                                         :post `post-move-bolt}))
 (def bolt (item/make "bolt"
                      "The big bolt was locking the door."
                      :unlocks bolted-door
                      :use {:pre true
                            :say "I removed the bolt but the door seemed to be locked still, I had to find the key."
+                           :points 20
                            :post `post-move-bolt}
                      :move {:pre true
                             :say "I removed the bolt but the door seemed to be locked still, I had to find the key."
+                            :points 20
                             :post `post-move-bolt}))
 
 (defn key-pre
@@ -82,6 +88,7 @@
                           :unlocks locked-door
                           :use-with {:pre `key-pre
                                      :say "The large key did the trick. I left it in the lock."
+                                     :points 50
                                      :post `key-post}))
 
 ; for use in room map

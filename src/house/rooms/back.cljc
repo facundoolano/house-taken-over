@@ -30,7 +30,8 @@
 (def back-hall3 (->
                   (room/make "Corridor"
                              "The end of a corridor with rooms to the east and west, and the door to the back garden"
-                             :initial-description "My steps resounded throughout a long corridor, with a series of rooms on each side. On the other end was an oak door, ajar.")
+                             :initial-description "My steps resounded throughout a long corridor, with a series of rooms on each side. On the other end was an oak door, ajar."
+                             :points 100)
                   (room/add-item (make-door ["west door" "w door"] :bedroom2) "")
                   (room/add-item (make-door ["east door" "e door"] :bedroom3) "")
                   (room/add-item corridor "")
@@ -132,16 +133,25 @@
                          :take "Way too heavy to carry around."))
 
 (defn reveal-room [old gs]
-  (update-in gs [:room-map] room/connect :library :north :hidden-room))
-
+  ;; need to manually remove the points because there are multiple verbs to do it
+  ;; FIXME remove when synonyms implemented
+  (let [portrait (utils/find-first gs "portrait")
+        no-points (-> portrait
+                      (update :pull dissoc :points)
+                      (update :move dissoc :points))]
+    (-> gs
+        (utils/replace-item portrait no-points)
+        (update-in [:room-map] room/connect :library :north :hidden-room))))
 
 (def portrait (item/make ["portrait" "painting"]
                          "It depicted a man in that very same room, sitting on the green velvet armchair, smoking a pipe with a severe look in his eyes. It must have been painted by the end of the 19th century, judging by the clothes."
                          :pull {:pre true
                                 :say "Pulling the frame of the portrait revealed it was fixed to a door that led to a hidden room."
+                                :points 100
                                 :post `reveal-room}
                          :move {:pre true
                                 :say "Pulling the frame of the portrait revealed it was fixed to a door that led to a hidden room."
+                                :points 100
                                 :post `reveal-room}
                          :push "It didn't move in that direction."
                          :take "Kind of big to fit in my bag."))
@@ -167,6 +177,7 @@
                   (room/make "Hidden room" "An old and musty study."
                              :initial-description "The candlelight exposed an old study which was evidently excluded from the house cleaning routines; a musty smell and a thick layer of dust made it clear that no one had walked through the door in a long time."
                              :known true
+                             :points 200
                              :dark true)
                   (room/add-item (item/make "desk" "It had one drawer.") "There was a wide desk in the center of the room and behind it a portrait of an old man.")
                   (room/add-item (item/make "door" "The same as in the other rooms.") "A door led east to the corridor.")

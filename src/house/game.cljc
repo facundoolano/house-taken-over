@@ -2,6 +2,7 @@
   (:require [advenjure.game :as game]
             [advenjure.plugins.map :refer [map-on-every-room]]
             [advenjure.plugins.dark :refer [dark-room]]
+            [advenjure.plugins.points :refer [points]]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
             [house.room-map :refer [room-map]]
@@ -60,8 +61,9 @@
 
 (def game-state (-> (game/make room-map :street)
                     (game/use-plugin map-on-every-room)
-                    (game/use-plugin burn-candle-plugin)
-                    (game/use-plugin dark-room)))
+                    (game/use-plugin dark-room)
+                    (game/use-plugin points)
+                    (game/use-plugin burn-candle-plugin)))
 
 (defn finished?
   "Finish when coming out the front door: in vestibule and carrying keys."

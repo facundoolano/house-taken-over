@@ -3,7 +3,9 @@
             [advenjure.utils :as utils]))
 
 (def letter (item/make ["letter"] "It was a letter from a lawyer."
-                       :read "…I appreciate that you don't want to stir up the memory of your father, but without the deed you can't claim ownership of the house, or any of the properties for that matter. I insist that you must search through his papers…"))
+                       :read {:pre true
+                              :say "…I appreciate that you don't want to stir up the memory of your father, but without the deed you can't claim ownership of the house, or any of the properties for that matter. I insist that you must search through his papers…"
+                              :points 10}))
 
 (defn open-envelope [old gs]
   (let [envelope (utils/find-first gs "envelope")]
@@ -29,7 +31,9 @@
       (utils/replace-item slot-envelope inv-envelope))))
 
 (def slot-envelope (item/make ["envelope" "paper"] "I couldn't see it from there."
-                              :take {:pre true :post `take-envelope}))
+                              :take {:pre true
+                                     :post `take-envelope
+                                     :points 40}))
 
 (defn add-envelope [old gs]
   (update-in gs [:room-map :vestibule :items] conj slot-envelope))
