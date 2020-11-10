@@ -16,6 +16,13 @@
                             :break "There was no need to break the window, just find a way to reach it."
                             :id "bath-window"))
 
+(def west-wall (item/make ["wall" "west wall" "brick wall"]
+                            "It was a nice brick wall. I can't climb it to reach the window"
+                            :look-in "I do not have my x-ray goggles..."
+                            :break "Break down the wall! Break down the wall!"
+                            :enter "Maybe I could go through the wall with quantum tunneling..."
+                            :id "west-wall"))
+
 (defn update-garden
   "Set the house back as not visited to say it's dark next time the player goes outside."
   [old gs]
@@ -79,6 +86,11 @@
   [gs item]
   (or (= (:id item) "bath-window") "No use there."))
 
+(defn is-west-wall
+  [gs item]
+  (or (= (:id item) "west-wall") "No use there."))
+
+
 (defn put-stool
   [old gs]
   (let [old-stool (utils/find-first gs "stool")]
@@ -94,7 +106,12 @@
                                        :say "I put the stool against the wall, just below the window."
                                        :points 150
                                        :post `put-stool}
+                            :put-against {:pre `is-west-wall
+                                          :say "I put the stool against the wall, just below the window."
+                                          :points 150
+                                          :post `put-stool}
                             :take true))
+
 
 (def after-stool (item/make ["piano stool" "stool"] "Good times."
                             :use "I didn't want to sit."
