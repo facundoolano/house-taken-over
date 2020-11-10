@@ -20,6 +20,8 @@
 
 (def put-in (make-compound-item-handler "put" :put))
 
+(def put-against (make-compound-item-handler "put" :put-against))
+
 (defn jump [game-state]
   (if (= :west-passage (:current-room game-state))
     (utils/say "No use, I still couldn't climb the window.")
@@ -44,6 +46,7 @@
                              "^turn (?<item>.*) on" "^turn on$" "^turn$"] light)
                   (add-verb ["^put (?<item1>.*) in (?<item2>.*)" "^put (?<item1>.*) in$"
                              "^put (?<item1>.*) on (?<item2>.*)" "^put (?<item1>.*) on$"] put-in)
+                  (add-verb ["^put (?<item1>.*) against (?<item2>.*)"] put-against)
                   (add-verb ["^light (?<item1>.*) with (?<item2>.*)" "^light (?<item1>.*) with$"
                              "^turn (?<item1>.*) with (?<item2>.*)"
                              "^turn on (?<item1>.*) with (?<item2>.*)"

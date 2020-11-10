@@ -2,7 +2,7 @@
   (:require [advenjure.rooms :as room]
             [advenjure.items :as item]
             [advenjure.utils :as utils]
-            [house.puzzles.bath-window :refer [bath-window screwdriver]]
+            [house.puzzles.bath-window :refer [bath-window screwdriver west-wall]]
             [house.puzzles.back-door :refer [back-door crowbar]]))
 
 (def garden (->
@@ -68,7 +68,8 @@
                     (room/make "West passage"
                                "The western passage ended up in a wall with a high window, probably of a bathroom."
                                :up "There was that window, but I couldn't reach it from the ground level.")
-                    (room/add-item bath-window "")))
+                    (room/add-item bath-window "")
+                    (room/add-item west-wall "")))
 
 (def room-window (item/make "window"
                             "It was a woman’s bedroom by the look of the furniture. She was on a sofa, knitting. A man was reading next to her. They didn’t seem to pay much attention to each other."
